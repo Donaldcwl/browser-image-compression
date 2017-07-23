@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="file" accept="image/*" onchange="compressImage(event);">
+        <script>
+          function compressImage(event) {
+            var imageFile = event.target.files[0];
+            console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+            console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+            imageCompression.getDataUrlFromFile(imageFile)
+              .then(imageCompression.loadImage)
+              .then(function (img) {
+                console.log(`originalFile img.width: ${img.width}`);
+                console.log(`originalFile img.height: ${img.height}`);
+                console.log('\n');
+              });
+            var maxSizeMB = 1;
+            var maxWidthOrHeight = 1920; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
+            imageCompression(imageFile, maxSizeMB, maxWidthOrHeight)
+              .then(function (compressedFile) {
+                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+                console.log(`compressed size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                imageCompression.getDataUrlFromFile(compressedFile)
+                  .then(imageCompression.loadImage)
+                  .then(function (img) {
+                    console.log(`compressedFile img.width: ${img.width}`);
+                    console.log(`compressedFile img.height: ${img.height}`);
+                  });
+                uploadToServer(compressedFile);
+              })
+              .catch(function (error) {
+                console.log(error.message);
+              });
+          }
+
+          function uploadToServer(file) {
+            var formData = new FormData();
+            formData.append('image', file);
+            $.ajax({
+              url: 'http://localhost/image-upload-api',
+              data: formData,
+              type: 'POST',
+              contentType: false,
+              processData: false,
+            });
+          }
+        </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../dist/browser-image-compression.js"></script>
+    </body>
+</html>

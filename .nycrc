@@ -1,0 +1,13 @@
+{
+  "sourceMap": false,
+  "instrument": false,
+  "include": [
+    "lib/**/*.js"
+  ],
+  "reporter": [
+    "text",
+    "json",
+    "html",
+    "lcov"
+  ]
+}
