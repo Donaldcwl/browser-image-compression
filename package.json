@@ -1,6 +1,6 @@
 {
   "name": "browser-image-compression",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Compress images in the browser",
   "main": "dist/browser-image-compression.js",
   "module": "dist/browser-image-compression.mjs",
@@ -9,7 +9,7 @@
     "eslint": "eslint lib test",
     "build": "rollup -c --environment BUILD:production",
     "watch": "rollup -c -w",
-    "pretest": "rollup -c",
+    "pretest": "npm run build",
     "test": "NODE_ENV=test nyc mocha",
     "prepublish": "npm test"
   },
