@@ -1,12 +1,21 @@
 # Browser Image Compression #
 [![npm](https://img.shields.io/npm/v/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
-[![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
+[![npm](./coverage/badge.svg)](https://github.com/Donaldcwl/async-parallel-foreach)
+[![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://github.com/Donaldcwl/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
 
-You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
+## Features ##
+- You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
+- **Multi-thread** (web worker) non-blocking compression are supported through options.
 
-**Multi-thread** (web worker) non-blocking compression are supported through options.
+## Change log ##
+v1.0.0
+- breaking change: change "imageCompression" function signature
+- use of OffscreenCanvas when support
+- use createImageBitmap when support, fallback to using FileReader readAsDataURL
+- add web worker support
+- follows image exif orientation
 
 ## Install ##
 ```
@@ -132,10 +141,3 @@ yarn start # or npm start
 # open your browser: http://localhost:5000/example/basic.html
 ```
 
-## Change log ##
-v1.0.0
-- breaking change: change "imageCompression" function signature
-- use of OffscreenCanvas when support
-- use createImageBitmap when support, fallback to dataurl
-- add web worker support
-- follows image exif orientation

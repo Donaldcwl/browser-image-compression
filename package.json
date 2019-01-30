@@ -11,7 +11,8 @@
     "watch": "rollup -c -w",
     "test": "NODE_ENV=test nyc mocha",
     "test:watch": "NODE_ENV=test nyc mocha -w",
-    "prepublish": "npm test && npm run build"
+    "prepublish": "npm test && npm run coverage-badges && npm run build",
+    "coverage-badges": "make-coverage-badge"
   },
   "homepage": "https://github.com/Donaldcwl/browser-image-compression#readme",
   "repository": {
@@ -49,7 +50,7 @@
     "file-api": "^0.10.4",
     "istanbul": "^0.4.5",
     "jsdom": "^13.2.0",
-    "jsdom-global": "^3.0.2",
+    "make-coverage-badge": "^1.0.1",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "rollup": "^1.1.2",
