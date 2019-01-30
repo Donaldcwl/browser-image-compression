@@ -41,16 +41,20 @@ options = {
   maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
   maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
   useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
-  maxIteration: number           // optional, max number of iteration to compress the image (default: 10)
+  maxIteration: number        // optional, max number of iteration to compress the image (default: 10)
 }
 ```
 ### Helper function ###
-#### imageCompression.drawImageInCanvas(img: HTMLImageElement, options): Canvas ####
+- for advanced user only, most user won't need to use the helper functions
 #### imageCompression.getDataUrlFromFile(file: File): Promise\<base64 encoded string> ####
 #### imageCompression.getFilefromDataUrl(dataUrl: string): Promise\<File> ####
 #### imageCompression.loadImage(url: string): Promise\<HTMLImageElement> ####
+#### imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement ####
+#### imageCompression.drawFileInCanvas(file: File): Promise\<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]> ####
 #### imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise\<File|Blob> ####
-#### imageCompression.drawFileInCanvas(file: File, options): Promise\<[ImageBitmap | HTMLImageElement, canvas]> ####
+#### imageCompression.getExifOrientation(file: File): Promise\<number> ####
+- based on https://stackoverflow.com/a/32490603/10395024
+
 ## Usage ##
 ```
 <input type="file" accept="image/*" onchange="handleImageUpload(event);">
