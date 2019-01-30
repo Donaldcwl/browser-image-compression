@@ -3,7 +3,10 @@
 [![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
+
 You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
+
+**Multi-thread** (web worker) non-blocking compression are supported through options.
 
 ## Install ##
 ```
@@ -31,17 +34,54 @@ or
 
 ## API ##
 ### Main function ###
-#### imageCompression(file: File[, maxSizeMB: number][, maxWidthOrHeight: number]): Promise\<File> ####
+#### imageCompression(file: File, options): Promise\<File> ####
+```javascript
+// you should provide one of maxSizeMB, maxWidthOrHeight in the options
+options = { 
+  maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
+  maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+  useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+  maxIteration: number           // optional, max number of iteration to compress the image (default: 10)
+}
+```
 ### Helper function ###
-#### imageCompression.drawImageInCanvas(img: HTMLImageElement[, maxWidthOrHeight: number]): Canvas ####
+#### imageCompression.drawImageInCanvas(img: HTMLImageElement, options): Canvas ####
 #### imageCompression.getDataUrlFromFile(file: File): Promise\<base64 encoded string> ####
 #### imageCompression.getFilefromDataUrl(dataUrl: string): Promise\<File> ####
 #### imageCompression.loadImage(url: string): Promise\<HTMLImageElement> ####
-
+#### imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise\<File|Blob> ####
+#### imageCompression.drawFileInCanvas(file: File, options): Promise\<[ImageBitmap | HTMLImageElement, canvas]> ####
 ## Usage ##
 ```
 <input type="file" accept="image/*" onchange="handleImageUpload(event);">
 ```
+async await syntax:
+```javascript
+async function handleImageUpload(event) {
+
+  const imageFile = event.target.files[0];
+  console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
+  console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
+
+  // you should provide one of maxSizeMB, maxWidthOrHeight in the options
+  var options = {
+    maxSizeMB: 1, // optional (default: Number.POSITIVE_INFINITY)
+    maxWidthOrHeight: 1920, // optional, compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+    useWebWorker: true  // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+  }
+  try {
+    const compressedFile = await imageCompression(imageFile, options);
+    console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+    console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
+    await uploadToServer(compressedFile); // write your own logic
+  } catch (error) {
+    console.log(error);
+  }
+
+}
+```
+Promise.then().catch() syntax:
 ```javascript
 function handleImageUpload(event) {
 
@@ -49,9 +89,13 @@ function handleImageUpload(event) {
   console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
   console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
-  var maxSizeMB = 1;
-  var maxWidthOrHeight = 1920; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
-  imageCompression(imageFile, maxSizeMB, maxWidthOrHeight) // maxSizeMB, maxWidthOrHeight are optional
+  // you should provide one of maxSizeMB, maxWidthOrHeight in the options
+  var options = {
+    maxSizeMB: 1, // optional (default: Number.POSITIVE_INFINITY)
+    maxWidthOrHeight: 1920, // optional, compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+    useWebWorker: true  // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+  }
+  imageCompression(imageFile, options)
     .then(function (compressedFile) {
       console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
       console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
@@ -63,28 +107,6 @@ function handleImageUpload(event) {
     });
 }
 ```
-with async/await syntax:
-```javascript
-async function handleImageUpload(event) {
-
-  const imageFile = event.target.files[0];
-  console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-  console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
-
-  const maxSizeMB = 1;
-  const maxWidthOrHeight = 1920; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
-  try {
-    const compressedFile = await imageCompression(imageFile, maxSizeMB);  // maxSizeMB, maxWidthOrHeight are optional
-    console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-    console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-
-    await uploadToServer(compressedFile); // write your own logic
-  } catch (error) {
-    console.log(error);
-  }
-
-}
-```
 
 ## Browsers support ##
 
@@ -94,3 +116,11 @@ async function handleImageUpload(event) {
 
 ## Example ##
 Please check the "example" folder in this repo
+
+## Change log ##
+v1.0.0
+- breaking change: change "imageCompression" function signature
+- use of OffscreenCanvas when support
+- use createImageBitmap when support, fallback to dataurl
+- add web worker support
+- follows image exif orientation
