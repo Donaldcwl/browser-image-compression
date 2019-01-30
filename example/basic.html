@@ -37,7 +37,7 @@
     const downloadLink = URL.createObjectURL(output)
     logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
 
-    uploadToServer(output)
+    // await uploadToServer(output)
   }
 
   function uploadToServer (file) {
