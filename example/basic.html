@@ -36,17 +36,16 @@
     console.log('output', output)
     const downloadLink = URL.createObjectURL(output)
     logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
+
+    uploadToServer(output)
   }
 
   function uploadToServer (file) {
     var formData = new FormData()
     formData.append('image', file)
-    $.ajax({
-      url: 'http://localhost/image-upload-api',
-      data: formData,
-      type: 'POST',
-      contentType: false,
-      processData: false
+    return fetch('http://localhost/image-upload-api', {
+      method: 'POST',
+      body: formData
     })
   }
 </script>
