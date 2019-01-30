@@ -15,7 +15,7 @@
                 console.log('\n');
               });
             var maxSizeMB = 1;
-            var maxWidthOrHeight = 1920; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
+            var maxWidthOrHeight = 3000; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
             imageCompression(imageFile, maxSizeMB, maxWidthOrHeight)
               .then(function (compressedFile) {
                 console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
