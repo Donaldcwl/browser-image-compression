@@ -10,8 +10,9 @@
     "build": "rollup -c --environment BUILD:production",
     "watch": "rollup -c -w",
     "test": "NODE_ENV=test nyc mocha",
+    "posttest": "npm run coverage-badges",
     "test:watch": "NODE_ENV=test nyc mocha -w",
-    "prepublish": "npm test && npm run coverage-badges && npm run build",
+    "prepublish": "npm test && npm run build",
     "coverage-badges": "make-coverage-badge"
   },
   "homepage": "https://github.com/Donaldcwl/browser-image-compression#readme",

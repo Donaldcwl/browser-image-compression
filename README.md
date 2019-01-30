@@ -12,8 +12,8 @@ Javascript module to be run in the web browser for image compression.
 ## Change log ##
 v1.0.0
 - breaking change: change "imageCompression" function signature
-- use of OffscreenCanvas when support
-- use createImageBitmap when support, fallback to using FileReader readAsDataURL
+- use of OffscreenCanvas when support, fallback to document.createElement('canvas')
+- use createImageBitmap when support, fallback to FileReader readAsDataURL
 - add web worker support
 - follows image exif orientation
 
