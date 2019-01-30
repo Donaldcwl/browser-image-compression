@@ -78,11 +78,10 @@ async function handleImageUpload(event) {
   console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
   console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
-  // you should provide one of maxSizeMB, maxWidthOrHeight in the options
   var options = {
-    maxSizeMB: 1, // optional (default: Number.POSITIVE_INFINITY)
-    maxWidthOrHeight: 1920, // optional, compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
-    useWebWorker: true  // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
   }
   try {
     const compressedFile = await imageCompression(imageFile, options);
@@ -104,11 +103,10 @@ function handleImageUpload(event) {
   console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
   console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
-  // you should provide one of maxSizeMB, maxWidthOrHeight in the options
   var options = {
-    maxSizeMB: 1, // optional (default: Number.POSITIVE_INFINITY)
-    maxWidthOrHeight: 1920, // optional, compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
-    useWebWorker: true  // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
   }
   imageCompression(imageFile, options)
     .then(function (compressedFile) {
