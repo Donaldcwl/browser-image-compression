@@ -1,6 +1,6 @@
 # Browser Image Compression #
 [![npm](https://img.shields.io/npm/v/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
-[![npm](./coverage/badge.svg)](https://github.com/Donaldcwl/async-parallel-foreach)
+[![npm](./coverage/badge.svg)](https://github.com/Donaldcwl/browser-image-compression)
 [![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://github.com/Donaldcwl/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
