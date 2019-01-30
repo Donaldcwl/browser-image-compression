@@ -46,17 +46,18 @@ options = {
 ```
 ### Helper function ###
 - for advanced user only, most user won't need to use the helper functions
-#### imageCompression.getDataUrlFromFile(file: File): Promise\<base64 encoded string> ####
-#### imageCompression.getFilefromDataUrl(dataUrl: string): Promise\<File> ####
-#### imageCompression.loadImage(url: string): Promise\<HTMLImageElement> ####
-#### imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement ####
-#### imageCompression.drawFileInCanvas(file: File): Promise\<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]> ####
-#### imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise\<File|Blob> ####
-#### imageCompression.getExifOrientation(file: File): Promise\<number> ####
-- based on https://stackoverflow.com/a/32490603/10395024
+```javascript
+imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
+imageCompression.getFilefromDataUrl(dataUrl: string): Promise<File>
+imageCompression.loadImage(url: string): Promise<HTMLImageElement>
+imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement
+imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>
+imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise<File|Blob>
+imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+```
 
 ## Usage ##
-```
+```html
 <input type="file" accept="image/*" onchange="handleImageUpload(event);">
 ```
 async await syntax:
