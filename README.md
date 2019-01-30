@@ -120,6 +120,15 @@ function handleImageUpload(event) {
 
 ## Example ##
 Please check the "example" folder in this repo
+- How to run the example:
+```bash
+git clone https://github.com/Donaldcwl/browser-image-compression.git
+cd browser-image-compression/example
+# following is basically starting a server so that you can open it in the browser
+yarn install # or npm install
+yarn start # or npm start
+# open your browser: http://localhost:5000/example/basic.html
+```
 
 ## Change log ##
 v1.0.0
