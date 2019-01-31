@@ -133,8 +133,8 @@ function handleImageUpload(event) {
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 ## Example ##
-Please check the "example" folder in this repo
-- How to run the [examples]:
+Please check the "[example]" folder in this repo
+- How to run the example:
 ```bash
 git clone https://github.com/Donaldcwl/browser-image-compression.git
 cd browser-image-compression/example
@@ -142,5 +142,5 @@ cd browser-image-compression/example
 ```
 
 [dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
-[examples]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
+[example]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
 [delivrjs]: https://cdn.jsdelivr.net/
