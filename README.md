@@ -1,6 +1,6 @@
 # Browser Image Compression #
 [![npm](https://img.shields.io/npm/v/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
-[![npm](coverage/badge.svg)](https://github.com/Donaldcwl/browser-image-compression)
+[![npm](./coverage/badge.svg)](https://github.com/Donaldcwl/browser-image-compression)
 [![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://github.com/Donaldcwl/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
@@ -134,7 +134,7 @@ function handleImageUpload(event) {
 
 ## Example ##
 Please check the "example" folder in this repo
-- How to run the example[examples]:
+- How to run the [examples]:
 ```bash
 git clone https://github.com/Donaldcwl/browser-image-compression.git
 cd browser-image-compression/example
