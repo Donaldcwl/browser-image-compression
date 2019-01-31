@@ -134,10 +134,13 @@ function handleImageUpload(event) {
 
 ## Example ##
 Please check the "example" folder in this repo
-- How to run the example:
+- How to run the example[examples]:
 ```bash
 git clone https://github.com/Donaldcwl/browser-image-compression.git
 cd browser-image-compression/example
 # open "basic.html" on your browser
 ```
 
+[dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
+[examples]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
+[delivrjs]: https://cdn.jsdelivr.net/
