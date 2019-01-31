@@ -1,6 +1,6 @@
 # Browser Image Compression #
 [![npm](https://img.shields.io/npm/v/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
-[![npm](./coverage/badge.svg)](https://github.com/Donaldcwl/browser-image-compression)
+[![npm](coverage/badge.svg)](https://github.com/Donaldcwl/browser-image-compression)
 [![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://github.com/Donaldcwl/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
@@ -18,10 +18,15 @@ v1.0.0
 - follows image exif orientation
 
 ## Install ##
+You can download imageCompression from the [dist folder][dist]. Alternatively, you can install it via yarn or npm
 ```
 npm install browser-image-compression --save
 or
 yarn add browser-image-compression
+```
+or use a CDN like [delivrjs]:
+```
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.0/dist/browser-image-compression.js
 ```
 
 ## How to use this module in your project? ##
@@ -38,7 +43,7 @@ or
 
 #### In html file ####
 ```html
-<script type="text/javascript" src="path/to/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.0/dist/browser-image-compression.js"></script>
 ```
 
 ## API ##
@@ -133,9 +138,6 @@ Please check the "example" folder in this repo
 ```bash
 git clone https://github.com/Donaldcwl/browser-image-compression.git
 cd browser-image-compression/example
-# following is basically starting a server so that you can open it in the browser
-yarn install # or npm install
-yarn start # or npm start
-# open your browser: http://localhost:5000/example/basic.html
+# open "basic.html" on your browser
 ```
 
