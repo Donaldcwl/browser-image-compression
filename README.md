@@ -1,15 +1,22 @@
 # Browser Image Compression #
 [![npm](https://img.shields.io/npm/v/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
-[![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://www.npmjs.com/package/browser-image-compression)
+[![npm](https://img.shields.io/npm/l/browser-image-compression.svg)](https://github.com/Donaldcwl/browser-image-compression)
 
 Javascript module to be run in the web browser for image compression.
-You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
+
+## Features ##
+- You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
 
 ## Install ##
+You can download imageCompression from the [dist folder][dist]. Alternatively, you can install it via yarn or npm
 ```
 npm install browser-image-compression --save
 or
 yarn add browser-image-compression
+```
+or use a CDN like [delivrjs]:
+```
+https://cdn.jsdelivr.net/npm/browser-image-compression@0.0.4/dist/browser-image-compression.js
 ```
 
 ## How to use this module in your project? ##
@@ -18,7 +25,7 @@ yarn add browser-image-compression
 (can be used in framework like React, Angular, Vue etc)
 
 (work with bundler like webpack and rollup)
-```javascript
+```javascriptx
 import imageCompression from 'browser-image-compression';
 ```
 
@@ -26,7 +33,7 @@ or
 
 #### In html file ####
 ```html
-<script type="text/javascript" src="path/to/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@0.0.4/dist/browser-image-compression.js"></script>
 ```
 
 ## API ##
@@ -93,4 +100,14 @@ async function handleImageUpload(event) {
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 ## Example ##
-Please check the "example" folder in this repo
+Please check the "[example]" folder in this repo
+- How to run the example:
+```bash
+git clone https://github.com/Donaldcwl/browser-image-compression.git
+cd browser-image-compression/example
+# open "basic.html" on your browser
+```
+
+[dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
+[example]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
+[delivrjs]: https://cdn.jsdelivr.net/
