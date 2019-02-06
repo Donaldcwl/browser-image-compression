@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <input type="file" accept="image/*" onchange="compressImage(event);">
-        <script>
-          function compressImage(event) {
-            var imageFile = event.target.files[0];
-            console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
-            console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
-            imageCompression.getDataUrlFromFile(imageFile)
-              .then(imageCompression.loadImage)
-              .then(function (img) {
-                console.log(`originalFile img.width: ${img.width}`);
-                console.log(`originalFile img.height: ${img.height}`);
-                console.log('\n');
-              });
-            var maxSizeMB = 1;
-            var maxWidthOrHeight = 3000; // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight
-            imageCompression(imageFile, maxSizeMB, maxWidthOrHeight)
-              .then(function (compressedFile) {
-                console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
-                console.log(`compressed size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
-                imageCompression.getDataUrlFromFile(compressedFile)
-                  .then(imageCompression.loadImage)
-                  .then(function (img) {
-                    console.log(`compressedFile img.width: ${img.width}`);
-                    console.log(`compressedFile img.height: ${img.height}`);
-                  });
-                uploadToServer(compressedFile);
-              })
-              .catch(function (error) {
-                console.log(error.message);
-              });
-          }
+<body>
+<p>look at console to see logs</p>
+<hr>
+<div>
+    <label for="web-worker">
+        Compress in web-worker
+        <input id="web-worker" type="file" accept="image/*" onchange="compressImage(event, true);">
+    </label>
+    <p id="web-worker-log"></p>
+</div>
+<hr>
+<div>
+    <label for="main-thread">
+        Compress in main thread
+        <input id="main-thread" type="file" accept="image/*" onchange="compressImage(event, false);">
+    </label>
+    <p id="main-thread-log"></p>
 
-          function uploadToServer(file) {
-            var formData = new FormData();
-            formData.append('image', file);
-            $.ajax({
-              url: 'http://localhost/image-upload-api',
-              data: formData,
-              type: 'POST',
-              contentType: false,
-              processData: false,
-            });
-          }
-        </script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@0.0.4/dist/browser-image-compression.js"></script>
-    </body>
+</div>
+<script>
+  async function compressImage (event, useWebWorker) {
+    var file = event.target.files[0]
+    var logDom
+    if (useWebWorker) {
+      logDom = document.querySelector('#web-worker-log')
+    } else {
+      logDom = document.querySelector('#main-thread-log')
+    }
+    logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
+    console.log('input', file)
+    var options = { maxSizeMB: 1, useWebWorker: useWebWorker }
+    const output = await imageCompression(file, options)
+    logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
+    console.log('output', output)
+    const downloadLink = URL.createObjectURL(output)
+    logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
+
+    // await uploadToServer(output)
+  }
+
+  function uploadToServer (file) {
+    var formData = new FormData()
+    formData.append('image', file)
+    return fetch('http://localhost/image-upload-api', {
+      method: 'POST',
+      body: formData
+    })
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.0/dist/browser-image-compression.js"></script>
+</body>
 </html>

@@ -9,7 +9,7 @@ let external = Object.keys(pkg.dependencies)
 let plugins = [
   nodent({ noRuntime: true, promises: true }),
   babel(),
-  terser()
+  terser({ keep_fnames: true })
 ]
 
 if (process.env.BUILD !== 'production') {
@@ -17,7 +17,6 @@ if (process.env.BUILD !== 'production') {
     exclude: ['test/**/*', 'node_modules/**/*']
   }))
 }
-
 
 export default {
   input: 'lib/index.js',
