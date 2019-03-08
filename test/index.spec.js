@@ -99,6 +99,49 @@ describe('Tests', function () {
     restore()
   })
 
+  it('resize jpg image file', async () => {
+    const restore = setupCustomFileAPI()
+
+    const file = new File(JPG_PATH)
+    // const file = new File(JPG_FILE, JPG_NAME)
+    // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
+
+    const maxWidthOrHeight = 720
+
+    const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
+
+    restore()
+
+    const temp = await drawFileInCanvas(compressedFile)
+    const img = temp[0]
+    expect(img.width).to.be.at.most(maxWidthOrHeight)
+    expect(img.height).to.be.at.most(maxWidthOrHeight)
+
+  })
+
+  it('compress and resize jpg image file', async () => {
+    const restore = setupCustomFileAPI()
+
+    const file = new File(JPG_PATH)
+    // const file = new File(JPG_FILE, JPG_NAME)
+    // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
+
+    const maxSizeMB = 1
+    const maxSizeByte = maxSizeMB * 1024 * 1024
+    const maxWidthOrHeight = 720
+
+    const compressedFile = await imageCompression(file, { maxSizeMB, maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
+    restore()
+
+    expect(compressedFile.size).to.be.at.most(maxSizeByte)
+
+    const temp = await drawFileInCanvas(compressedFile)
+    const img = temp[0]
+    expect(img.width).to.be.at.most(maxWidthOrHeight)
+    expect(img.height).to.be.at.most(maxWidthOrHeight)
+
+  })
+
   it('compress png image file', async () => {
     const restore = setupCustomFileAPI()
 
@@ -111,6 +154,46 @@ describe('Tests', function () {
     expect(compressedFile.size).to.be.at.most(maxSizeByte)
 
     restore()
+  })
+
+  it('resize png image file', async () => {
+    const restore = setupCustomFileAPI()
+
+    const file = new File(PNG_PATH)
+
+    const maxWidthOrHeight = 720
+
+    const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
+    restore()
+
+    const temp = await drawFileInCanvas(compressedFile)
+
+    const img = temp[0]
+    expect(img.width).to.be.at.most(maxWidthOrHeight)
+    expect(img.height).to.be.at.most(maxWidthOrHeight)
+
+  })
+
+  it('compress and resize png image file', async () => {
+    const restore = setupCustomFileAPI()
+
+    const file = new File(PNG_PATH)
+
+    const maxSizeMB = 1
+    const maxSizeByte = maxSizeMB * 1024 * 1024
+    const maxWidthOrHeight = 720
+
+    const compressedFile = await imageCompression(file, { maxSizeMB, maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
+    restore()
+
+    expect(compressedFile.size).to.be.at.most(maxSizeByte)
+
+    const temp = await drawFileInCanvas(compressedFile)
+
+    const img = temp[0]
+    expect(img.width).to.be.at.most(maxWidthOrHeight)
+    expect(img.height).to.be.at.most(maxWidthOrHeight)
+
   })
 
   it('fails if wrong file provided', async () => {

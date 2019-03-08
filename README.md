@@ -10,6 +10,9 @@ Javascript module to be run in the web browser for image compression.
 - **Multi-thread** (web worker) non-blocking compression are supported through options.
 
 ## Change log ##
+v1.0.1
+- fixing bug related to wrong image output resolution in some case
+
 v1.0.0
 - breaking change: change "imageCompression" function signature
 - use of OffscreenCanvas when support, fallback to document.createElement('canvas')
@@ -140,6 +143,16 @@ git clone https://github.com/Donaldcwl/browser-image-compression.git
 cd browser-image-compression/example
 # open "basic.html" on your browser
 ```
+
+## Contribution ##
+1. fork the repo and git clone it
+2. run `npm run watch` # it will watch code change in lib/ folder and generate js in dist/ folder
+3. add/update code in lib/ folder
+4. try the code by opening example/development.html which will load the js in dist/ folder
+5. add/update test in test/ folder
+6. `npm run test`
+7. push to your forked repo on github
+8. make a pull request to this repo
 
 [dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
 [example]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
