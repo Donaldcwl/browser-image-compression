@@ -9,17 +9,6 @@ Javascript module to be run in the web browser for image compression.
 - You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
 - **Multi-thread** (web worker) non-blocking compression are supported through options.
 
-## Change log ##
-v1.0.1
-- fixing bug related to wrong image output resolution in some case
-
-v1.0.0
-- breaking change: change "imageCompression" function signature
-- use of OffscreenCanvas when support, fallback to document.createElement('canvas')
-- use createImageBitmap when support, fallback to FileReader readAsDataURL
-- add web worker support
-- follows image exif orientation
-
 ## Install ##
 You can download imageCompression from the [dist folder][dist]. Alternatively, you can install it via yarn or npm
 ```
