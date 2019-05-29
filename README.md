@@ -63,7 +63,6 @@ imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement
 imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>
 imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise<File|Blob>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
-imageCompression.enableCordovaSupport()
 ```
 
 ## Usage ##
@@ -127,11 +126,6 @@ function handleImageUpload(event) {
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
-## Support cordova (cordova-plugin-file) ##
-Call the following *once* after loading this library
-```javascript
-imageCompression.enableCordovaSupport()
-```
 
 ## Example ##
 Please check the "[example]" folder in this repo
