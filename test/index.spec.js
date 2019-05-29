@@ -14,20 +14,9 @@ const PNG_NAME = 'sonic.png'
 const PNG_PATH = path.join(IMAGE_DIR, PNG_NAME)
 const PNG_FILE = fs.readFileSync(PNG_PATH)
 const base64String = 'data:image/jpeg;base64,' + Buffer.from(JPG_FILE).toString('base64')
-// const base64String2 = 'data:image/png;base64,' + new Buffer(fs.readFileSync(PNG_PATH)).toString('base64');
+const base64String2 = 'data:image/png;base64,' + Buffer.from(PNG_FILE).toString('base64');
 
 chai.use(chaiAsPromised)
-
-function setupCustomFileAPI () {
-  const fileAPI = require('file-api')
-  const tmp = { FileReader: global.FileReader, File: global.File }
-  global.FileReader = fileAPI.FileReader
-  global.File = fileAPI.File
-  return () => {
-    global.FileReader = tmp.FileReader
-    global.File = tmp.File
-  }
-}
 
 describe('Tests', function () {
   this.timeout(30000)
@@ -35,21 +24,30 @@ describe('Tests', function () {
   beforeEach(() => {
   })
 
-  it('get File from base64', async () => {
+  it('get File from jpg base64', async () => {
     const file = await getFilefromDataUrl(base64String, JPG_PATH)
     expect(file.type).to.equal('image/jpeg')
     expect(file.size).to.equal(2001612)
     expect(file).to.be.an.instanceof(Blob)
   })
 
-  it('get base64 from file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(JPG_PATH)
+  it('get base64 from jpg file', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
     const base64 = await getDataUrlFromFile(file)
     expect(base64).to.equal(base64String)
+  })
 
-    restore()
+  it('get File from png base64', async () => {
+    const file = await getFilefromDataUrl(base64String2, PNG_PATH)
+    expect(file.type).to.equal('image/png')
+    expect(file.size).to.equal(2304210)
+    expect(file).to.be.an.instanceof(Blob)
+  })
+
+  it('get base64 from png file', async () => {
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
+    const base64 = await getDataUrlFromFile(file)
+    expect(base64).to.equal(base64String2)
   })
 
   it('load image', async () => {
@@ -68,9 +66,7 @@ describe('Tests', function () {
   })
 
   it('draw file in canvas', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(JPG_PATH)
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
 
     const [img, canvas] = await drawFileInCanvas(file)
     // expect(img).to.satisfy((c) => c instanceof HTMLImageElement || c instanceof ImageBitmap)
@@ -79,14 +75,10 @@ describe('Tests', function () {
     expect(canvas.width).to.be.a('number')
     expect(canvas.height).to.be.a('number')
     expect(canvas.getContext).to.be.a('function')
-
-    restore()
   })
 
   it('compress jpg image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(JPG_PATH)
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
     // const file = new File(JPG_FILE, JPG_NAME)
     // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
@@ -95,22 +87,16 @@ describe('Tests', function () {
 
     const compressedFile = await imageCompression(file, { maxSizeMB, useWebWorker: false, exifOrientation: -2 })
     expect(compressedFile.size).to.be.at.most(maxSizeByte)
-
-    restore()
   })
 
   it('resize jpg image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(JPG_PATH)
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
     // const file = new File(JPG_FILE, JPG_NAME)
     // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
     const maxWidthOrHeight = 720
 
     const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
-
-    restore()
 
     const temp = await drawFileInCanvas(compressedFile)
     const img = temp[0]
@@ -120,9 +106,7 @@ describe('Tests', function () {
   })
 
   it('compress and resize jpg image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(JPG_PATH)
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
     // const file = new File(JPG_FILE, JPG_NAME)
     // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
@@ -130,8 +114,12 @@ describe('Tests', function () {
     const maxSizeByte = maxSizeMB * 1024 * 1024
     const maxWidthOrHeight = 720
 
-    const compressedFile = await imageCompression(file, { maxSizeMB, maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
-    restore()
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB,
+      maxWidthOrHeight,
+      useWebWorker: false,
+      exifOrientation: -2
+    })
 
     expect(compressedFile.size).to.be.at.most(maxSizeByte)
 
@@ -143,28 +131,21 @@ describe('Tests', function () {
   })
 
   it('compress png image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(PNG_PATH)
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
 
     const maxSizeMB = 1
     const maxSizeByte = maxSizeMB * 1024 * 1024
 
     const compressedFile = await imageCompression(file, { maxSizeMB, useWebWorker: false, exifOrientation: -2 })
     expect(compressedFile.size).to.be.at.most(maxSizeByte)
-
-    restore()
   })
 
   it('resize png image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(PNG_PATH)
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
 
     const maxWidthOrHeight = 720
 
     const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
-    restore()
 
     const temp = await drawFileInCanvas(compressedFile)
 
@@ -175,16 +156,18 @@ describe('Tests', function () {
   })
 
   it('compress and resize png image file', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(PNG_PATH)
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
 
     const maxSizeMB = 1
     const maxSizeByte = maxSizeMB * 1024 * 1024
     const maxWidthOrHeight = 720
 
-    const compressedFile = await imageCompression(file, { maxSizeMB, maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 })
-    restore()
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB,
+      maxWidthOrHeight,
+      useWebWorker: false,
+      exifOrientation: -2
+    })
 
     expect(compressedFile.size).to.be.at.most(maxSizeByte)
 
@@ -217,14 +200,10 @@ describe('Tests', function () {
   })
 
   it('fails if wrong file type provided', async () => {
-    const restore = setupCustomFileAPI()
-
-    const file = new File(__filename)
+    const file = new File(['What is the meaning of life the universe and everything?'], 'text.txt', { type: 'text/plain' })
 
     const maxSizeMB = 1
     await expect(imageCompression(file, { maxSizeMB, useWebWorker: false })).to.eventually.rejectedWith(/not an image/)
-
-    restore()
   })
 
   it('get the get image orientation from Exif', async () => {
