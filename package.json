@@ -51,14 +51,13 @@
     "istanbul": "^0.4.5",
     "jsdom": "^15.1.1",
     "make-coverage-badge": "^1.0.1",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-istanbul": "^2.0.1",
     "rollup-plugin-nodent": "^0.2.2",
-    "rollup-plugin-terser": "^4.0.3",
-    "rollup-plugin-uglify": "^6.0.2",
-    "rollup-watch": "^4.0.0"
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-uglify": "^6.0.2"
   }
 }

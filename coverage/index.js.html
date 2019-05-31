@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">55.56% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>15/27</span>
+        <span class='fraction'>24/27</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">36.36% </span>
+        <span class="strong">68.18% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/22</span>
+        <span class='fraction'>15/22</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,16 +35,16 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">55.56% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>15/27</span>
+        <span class='fraction'>24/27</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -159,17 +159,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,7 +177,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -186,15 +186,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -240,17 +240,17 @@ async function imageCompression (file, options) {
 &nbsp;
   let compressedFile
 &nbsp;
-  options.maxSizeMB = options.maxSizeMB || <span class="branch-1 cbranch-no" title="branch not covered" >Number.POSITIVE_INFINITY</span>
+  options.maxSizeMB = options.maxSizeMB || Number.POSITIVE_INFINITY
   options.useWebWorker = typeof options.useWebWorker === 'boolean' ? options.useWebWorker : <span class="branch-1 cbranch-no" title="branch not covered" >true</span>
 &nbsp;
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (!(file instanceof Blob || file instanceof fileType)) {
+  if (!(file instanceof Blob || file instanceof fileType)) {
     throw new Error('The file given is not an instance of Blob or File')
-  } else <span class="cstat-no" title="statement not covered" >if (!/^image/.test(file.type)) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new Error('The file given is not an image')</span>
+  } else if (!/^image/.test(file.type)) {
+    throw new Error('The file given is not an image')
   }
 &nbsp;
   // try run in web worker, fall back to run in main thread
-  const inWebWorker = <span class="cstat-no" title="statement not covered" >typeof WorkerGlobalScope !== 'undefined' &amp;&amp; self instanceof WorkerGlobalScope</span>
+  const inWebWorker = typeof WorkerGlobalScope !== 'undefined' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >self instanceof WorkerGlobalScope</span>
 &nbsp;
   // if (inWebWorker) {
   //   console.log('run compression in web worker')
@@ -258,7 +258,7 @@ async function imageCompression (file, options) {
   //   console.log('run compression in main thread')
   // }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (options.useWebWorker &amp;&amp; typeof Worker === 'function' &amp;&amp; !inWebWorker) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (options.useWebWorker &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof Worker === 'function' </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!inWebWorker)</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
       // "compressOnWebWorker" is kind of like a recursion to call "imageCompression" again inside web worker
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compressOnWebWorker(file, options)</span>
@@ -267,15 +267,15 @@ async function imageCompression (file, options) {
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compress(file, options)</span>
     }
   } else {
-<span class="cstat-no" title="statement not covered" >    compressedFile = await compress(file, options)</span>
+    compressedFile = await compress(file, options)
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    compressedFile.name = file.name</span>
-<span class="cstat-no" title="statement not covered" >    compressedFile.lastModified = file.lastModified</span>
+  try {
+    compressedFile.name = file.name
+    compressedFile.lastModified = file.lastModified
   } catch (e) {}
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return compressedFile</span>
+  return compressedFile
 }
 &nbsp;
 imageCompression.getDataUrlFromFile = getDataUrlFromFile
@@ -295,7 +295,7 @@ export default imageCompression
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 23 2019 12:17:12 GMT-0500 (CDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri May 31 2019 16:08:29 GMT+0800 (Hong Kong Standard Time)
 </div>
 </div>
 <script src="prettify.js"></script>
