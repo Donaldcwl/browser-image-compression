@@ -126,6 +126,7 @@ function handleImageUpload(event) {
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
+
 ## Example ##
 Please check the "[example]" folder in this repo
 - How to run the example:
