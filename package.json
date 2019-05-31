@@ -1,6 +1,6 @@
 {
   "name": "browser-image-compression",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Compress images in the browser",
   "main": "dist/browser-image-compression.js",
   "module": "dist/browser-image-compression.mjs",
@@ -55,7 +55,7 @@
     "nyc": "^14.1.1",
     "rollup": "^1.1.2",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-istanbul": "^2.0.1",
+    "rollup-plugin-license": "^0.8.1",
     "rollup-plugin-nodent": "^0.2.2",
     "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-uglify": "^6.0.2"

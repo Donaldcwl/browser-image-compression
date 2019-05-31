@@ -1,4 +1,4 @@
-## v1.0.3 (1 June 2019)
+## v1.0.4 (1 June 2019)
 * added: support for cordova project that uses cordova-plugin-file
 * optimized: follow image exif orientation even though image do not required to compress or resize
 * fixed: error may throw on iPhone Safari because of OffscreenCanvas cannot get 2d context
