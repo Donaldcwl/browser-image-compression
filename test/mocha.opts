@@ -1,1 +1,0 @@
---recursive --require @babel/register --require @babel/polyfill --require ./test/setup_jsdom.js

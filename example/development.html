@@ -19,6 +19,28 @@
     <p id="main-thread-log"></p>
 
 </div>
+<table>
+    <tr>
+        <td>input preview</td>
+        <td>output preview</td>
+    </tr>
+    <tr>
+        <td><img id="preview" /></td>
+        <td><img id="preview-after-compress" /></td>
+    </tr>
+</table>
+
+<style>
+    td {
+        width: 50%;
+    }
+
+    img {
+        max-width: 100%;
+    }
+</style>
+
+
 <script>
   async function compressImage (event, useWebWorker) {
     var file = event.target.files[0]
@@ -28,15 +50,18 @@
     } else {
       logDom = document.querySelector('#main-thread-log')
     }
+    document.getElementById('preview').src = URL.createObjectURL(file)
+
     logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('input', file)
     var options = { maxSizeMB: 1, maxWidthOrHeight: 720, useWebWorker: useWebWorker }
+    console.log('exif', await imageCompression.getExifOrientation(file))
     const output = await imageCompression(file, options)
     logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('output', output)
     const downloadLink = URL.createObjectURL(output)
     logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
-
+    document.getElementById('preview-after-compress').src = downloadLink
     // await uploadToServer(output)
   }
 
