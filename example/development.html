@@ -31,10 +31,14 @@
 </table>
 
 <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
     td {
+        vertical-align: top;
         width: 50%;
     }
-
     img {
         max-width: 100%;
     }
@@ -54,8 +58,8 @@
 
     logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('input', file)
-    var options = { maxSizeMB: 1, maxWidthOrHeight: 720, useWebWorker: useWebWorker }
-    console.log('exif', await imageCompression.getExifOrientation(file))
+    console.log('ExifOrientation', await imageCompression.getExifOrientation(file))
+    var options = { maxSizeMB: 1, maxWidthOrHeight: 1024, useWebWorker: useWebWorker }
     const output = await imageCompression(file, options)
     logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('output', output)
