@@ -1,7 +1,7 @@
 import babel from 'rollup-plugin-babel'
-import istanbul from 'rollup-plugin-istanbul'
 import { terser } from 'rollup-plugin-terser'
 import nodent from 'rollup-plugin-nodent'
+// import istanbul from 'rollup-plugin-istanbul'
 
 let pkg = require('./package.json')
 let external = Object.keys(pkg.dependencies)
@@ -12,11 +12,11 @@ let plugins = [
   terser({ keep_fnames: true })
 ]
 
-if (process.env.BUILD !== 'production') {
-  plugins.push(istanbul({
-    exclude: ['test/**/*', 'node_modules/**/*']
-  }))
-}
+// if (process.env.BUILD !== 'production') {
+//   plugins.push(istanbul({
+//     exclude: ['test/**/*', 'node_modules/**/*']
+//   }))
+// }
 
 export default {
   input: 'lib/index.js',
