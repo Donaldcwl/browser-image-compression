@@ -79,8 +79,6 @@ describe('Tests', function () {
 
   it('compress jpg image file', async () => {
     const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
-    // const file = new File(JPG_FILE, JPG_NAME)
-    // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
     const maxSizeMB = 1
     const maxSizeByte = maxSizeMB * 1024 * 1024
@@ -91,8 +89,6 @@ describe('Tests', function () {
 
   it('resize jpg image file', async () => {
     const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
-    // const file = new File(JPG_FILE, JPG_NAME)
-    // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
     const maxWidthOrHeight = 720
 
@@ -107,8 +103,6 @@ describe('Tests', function () {
 
   it('compress and resize jpg image file', async () => {
     const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' })
-    // const file = new File(JPG_FILE, JPG_NAME)
-    // Object.defineProperty(file, 'type', { value: 'image/jpeg' })
 
     const maxSizeMB = 1
     const maxSizeByte = maxSizeMB * 1024 * 1024
