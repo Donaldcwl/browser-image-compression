@@ -9,7 +9,10 @@ let external = Object.keys(pkg.dependencies)
 let plugins = [
   nodent({ noRuntime: true, promises: true }),
   babel(),
-  terser({ keep_fnames: true }),
+  terser({
+    keep_fnames: true,
+    mangle: { reserved: ['CustomFile', 'CustomFileReader'] }
+  }),
   license({
     sourcemap: true,
     banner: '<%= _.startCase(pkg.name) %>\nv<%= pkg.version %>\nby <%= pkg.author %>\n<%= pkg.repository.url %>',
