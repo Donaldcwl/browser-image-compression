@@ -1,5 +1,5 @@
 TN:
-SF:/Users/donald/Project/browser-image-compression/lib/image-compression.js
+SF:/zeta/git/browser-image-compression/lib/image-compression.js
 FN:14,compress
 FNF:1
 FNH:1
@@ -41,7 +41,7 @@ BRF:10
 BRH:9
 end_of_record
 TN:
-SF:/Users/donald/Project/browser-image-compression/lib/index.js
+SF:/zeta/git/browser-image-compression/lib/index.js
 FN:28,imageCompression
 FNF:1
 FNH:1
@@ -95,7 +95,7 @@ BRF:17
 BRH:12
 end_of_record
 TN:
-SF:/Users/donald/Project/browser-image-compression/lib/utils.js
+SF:/zeta/git/browser-image-compression/lib/utils.js
 FN:11,getDataUrlFromFile
 FN:12,(anonymous_1)
 FN:14,(anonymous_2)
@@ -153,7 +153,7 @@ DA:32,14
 DA:33,14
 DA:34,14
 DA:35,14
-DA:36,18315383
+DA:36,18520675
 DA:38,14
 DA:39,14
 DA:40,14
