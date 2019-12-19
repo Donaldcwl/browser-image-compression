@@ -4,7 +4,14 @@ import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import imageCompression from '../lib'
 
-const { drawImageInCanvas, getDataUrlFromFile, getFilefromDataUrl, loadImage, getExifOrientation, drawFileInCanvas } = imageCompression
+import {
+  drawFileInCanvas,
+  drawImageInCanvas,
+  getDataUrlFromFile,
+  getExifOrientation,
+  getFilefromDataUrl,
+  loadImage,
+} from '../lib/utils'
 
 const IMAGE_DIR = './example'
 const JPG_NAME = '178440.jpg'
