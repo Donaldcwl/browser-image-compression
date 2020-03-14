@@ -200,7 +200,7 @@ describe('Tests', function () {
     await expect(imageCompression(file, { maxSizeMB, useWebWorker: false })).to.eventually.rejectedWith(/not an image/)
   })
 
-  it('get the get image orientation from Exif', async () => {
+  it('get the image orientation from Exif', async () => {
     const file = new File(JPG_FILE, JPG_NAME)
     const orientation = await getExifOrientation(file)
     expect(orientation).to.equal(-2)

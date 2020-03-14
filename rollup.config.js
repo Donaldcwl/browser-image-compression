@@ -2,9 +2,11 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import nodent from 'rollup-plugin-nodent'
 import license from 'rollup-plugin-license'
+import copy from 'rollup-plugin-copy'
+import path from 'path'
 
-let pkg = require('./package.json')
-let external = Object.keys(pkg.dependencies)
+const pkg = require('./package.json')
+const external = Object.keys(pkg.dependencies)
 
 let plugins = [
   nodent({ noRuntime: true, promises: true }),
@@ -17,6 +19,11 @@ let plugins = [
     sourcemap: true,
     banner: '<%= _.startCase(pkg.name) %>\nv<%= pkg.version %>\nby <%= pkg.author %>\n<%= pkg.repository.url %>',
   }),
+  copy({
+    targets: [
+      { src: 'lib/index.d.ts', dest: path.dirname(pkg.types) , rename: path.basename(pkg.types) }
+    ]
+  })
 ]
 
 export default {

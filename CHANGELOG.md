@@ -1,3 +1,12 @@
+## v1.0.7 (15 Mar 2020)
+* allow fileType override
+* fix garbage clean canvas for safari
+* fix issue in Cordova support
+* fix issue in IE browser
+* fix other issues
+* useWebWorker default set to false
+* add ts type file
+
 ## v1.0.6 (5 July 2019)
 * fixed: exif orientation do not work in some situations
 
