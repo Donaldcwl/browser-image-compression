@@ -1,4 +1,5 @@
 ## v1.0.7 (15 Mar 2020)
+* add onProgress function in options for compression progress updates
 * allow fileType override
 * fix garbage clean canvas for safari
 * fix issue in Cordova support

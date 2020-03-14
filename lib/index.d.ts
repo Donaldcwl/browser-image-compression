@@ -5,6 +5,7 @@ declare module 'browser-image-compression' {
     useWebWorker: boolean;
     maxIteration: number,
     exifOrientation: number,
+    progress: Function,
     fileType: string
   }
 

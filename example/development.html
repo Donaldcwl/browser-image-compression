@@ -5,7 +5,7 @@
 <hr>
 <div>
     <label for="web-worker">
-        Compress in web-worker
+        Compress in web-worker <span id="web-worker-progress"></span>
         <input id="web-worker" type="file" accept="image/*" onchange="compressImage(event, true);">
     </label>
     <p id="web-worker-log"></p>
@@ -13,7 +13,7 @@
 <hr>
 <div>
     <label for="main-thread">
-        Compress in main thread
+        Compress in main thread <span id="main-thread-progress"></span>
         <input id="main-thread" type="file" accept="image/*" onchange="compressImage(event, false);">
     </label>
     <p id="main-thread-log"></p>
@@ -48,18 +48,20 @@
 <script>
   async function compressImage (event, useWebWorker) {
     var file = event.target.files[0]
-    var logDom
+    var logDom, progressDom
     if (useWebWorker) {
       logDom = document.querySelector('#web-worker-log')
+      progressDom = document.querySelector('#web-worker-progress')
     } else {
       logDom = document.querySelector('#main-thread-log')
+      progressDom = document.querySelector('#main-thread-progress')
     }
     document.getElementById('preview').src = URL.createObjectURL(file)
 
     logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('input', file)
     console.log('ExifOrientation', await imageCompression.getExifOrientation(file))
-    var options = { maxSizeMB: 1, maxWidthOrHeight: 1024, useWebWorker: useWebWorker }
+    var options = { maxSizeMB: 1, maxWidthOrHeight: 1024, useWebWorker: useWebWorker, onProgress: onProgress }
     const output = await imageCompression(file, options)
     logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('output', output)
@@ -67,6 +69,10 @@
     logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
     document.getElementById('preview-after-compress').src = downloadLink
     // await uploadToServer(output)
+
+    function onProgress (p) {
+      progressDom.innerHTML = '('+p+'%'+')'
+    }
   }
 
   function uploadToServer (file) {
