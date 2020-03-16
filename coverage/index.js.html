@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.21% </span>
+                <span class="strong">89.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/29</span>
+                <span class='fraction'>25/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.42% </span>
+                <span class="strong">70.59% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/19</span>
+                <span class='fraction'>12/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.21% </span>
+                <span class="strong">89.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/29</span>
+                <span class='fraction'>25/28</span>
             </div>
         
             
@@ -139,7 +139,14 @@
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,6 +178,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,32 +193,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -233,7 +247,7 @@ import {
   handleMaxWidthOrHeight,
   followExifOrientation,
   CustomFile,
-  cleanupMemory
+  cleanupCanvasMemory
 } from './utils'
 import { compressOnWebWorker } from './web-worker'
 &nbsp;
@@ -241,12 +255,14 @@ import { compressOnWebWorker } from './web-worker'
  * Compress an image file.
  *
  * @param {File} file
- * @param {Object} options - { maxSizeMB=Number.POSITIVE_INFINITY, maxWidthOrHeight, useWebWorker=false, maxIteration = 10, exifOrientation }
+ * @param {Object} options - { maxSizeMB=Number.POSITIVE_INFINITY, maxWidthOrHeight, useWebWorker=false, maxIteration = 10, exifOrientation, fileType }
  * @param {number} [options.maxSizeMB=Number.POSITIVE_INFINITY]
- * @param {number} [options.maxWidthOrHeight=undefined] * @param {number} [options.maxWidthOrHeight=undefined]
+ * @param {number} [options.maxWidthOrHeight=undefined]
  * @param {boolean} [options.useWebWorker=false]
  * @param {number} [options.maxIteration=10]
- * @param {number} [options.exifOrientation=] - default to be the exif orientation from the image file
+ * @param {number} [options.exifOrientation] - default to be the exif orientation from the image file
+ * @param {Function} [options.onProgress] - a function takes one progress argument (progress from 0 to 100)
+ * @param {string} [options.fileType] - default to be the original mime type from the image file
  * @returns {Promise&lt;File | Blob&gt;}
  */
 async function imageCompression (file, options) {
@@ -254,7 +270,8 @@ async function imageCompression (file, options) {
   let compressedFile
 &nbsp;
   options.maxSizeMB = options.maxSizeMB || Number.POSITIVE_INFINITY
-  options.useWebWorker = typeof options.useWebWorker === 'boolean' ? options.useWebWorker : <span class="branch-1 cbranch-no" title="branch not covered" >false</span>
+  const useWebWorker = typeof options.useWebWorker === 'boolean' ? options.useWebWorker : <span class="branch-1 cbranch-no" title="branch not covered" >false</span>
+  delete options.useWebWorker
 &nbsp;
   if (!(file instanceof Blob || file instanceof CustomFile)) {
     throw new Error('The file given is not an instance of Blob or File')
@@ -265,21 +282,24 @@ async function imageCompression (file, options) {
   // try run in web worker, fall back to run in main thread
   const inWebWorker = typeof WorkerGlobalScope !== 'undefined' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >self instanceof WorkerGlobalScope</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (inWebWorker) {
-<span class="cstat-no" title="statement not covered" >    console.log('run compression in web worker')</span>
-  } else {
-    console.log('run compression in main thread')
-  }
+  // if ((useWebWorker &amp;&amp; typeof Worker === 'function') || inWebWorker) {
+  //   console.log('run compression in web worker')
+  // } else {
+  //   console.log('run compression in main thread')
+  // }
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (options.useWebWorker &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof Worker === 'function' </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!inWebWorker)</span> {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (useWebWorker &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof Worker === 'function' </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!inWebWorker)</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
+      // console.log(1)
       // "compressOnWebWorker" is kind of like a recursion to call "imageCompression" again inside web worker
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compressOnWebWorker(file, options)</span>
     } catch (e) {
       // console.warn('Run compression in web worker failed:', e, ', fall back to main thread')
+      // console.log(1.5)
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compress(file, options)</span>
     }
   } else {
+    // console.log(2)
     compressedFile = await compress(file, options)
   }
 &nbsp;
@@ -300,7 +320,8 @@ imageCompression.canvasToFile = canvasToFile
 imageCompression.getExifOrientation = getExifOrientation
 imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight
 imageCompression.followExifOrientation = followExifOrientation
-imageCompression.cleanupMemory = cleanupMemory
+imageCompression.cleanupMemory = cleanupCanvasMemory
+imageCompression.version = '1.0.7'
 &nbsp;
 export default imageCompression
 &nbsp;</pre></td></tr></table></pre>
@@ -310,7 +331,7 @@ export default imageCompression
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Mar 15 2020 02:33:08 GMT+0800 (Hong Kong Standard Time)
+                at Mon Mar 16 2020 12:52:28 GMT+0800 (Hong Kong Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
