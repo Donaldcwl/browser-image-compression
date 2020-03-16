@@ -11,7 +11,7 @@ declare module 'browser-image-compression' {
     /** Default to be the exif orientation from the image file */
     exifOrientation?: number,
     /** A function takes one progress argument (progress from 0 to 100) */
-    onProgress?: Function,
+    onProgress?: (progress: number) => void,
     /** Default to be the original mime type from the image file */
     fileType?: string
   }
