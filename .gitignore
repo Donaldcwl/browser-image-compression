@@ -87,5 +87,5 @@ Temporary Items
 .apdisk
 
 .idea/
-#dist/
-#coverage/
+dist/
+coverage/
