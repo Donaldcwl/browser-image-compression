@@ -14,7 +14,7 @@ declare module 'browser-image-compression' {
     fileType?: string
   }
 
-  function imageCompression (image: Blob, options: Options): Blob;
+  function imageCompression (image: Blob, options: Options): Promise<File | Blob>;
 
   export = imageCompression;
 }
