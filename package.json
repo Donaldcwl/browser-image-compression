@@ -34,7 +34,6 @@
   "author": "Donald <donaldcwl@gmail.com>",
   "license": "MIT",
   "files": [
-    "lib",
     "dist"
   ],
   "dependencies": {},
