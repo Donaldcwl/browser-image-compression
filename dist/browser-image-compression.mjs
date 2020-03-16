@@ -1,6 +1,6 @@
 /**
  * Browser Image Compression
- * v1.0.7
+ * v1.0.8
  * by Donald <donaldcwl@gmail.com>
  * https://github.com/Donaldcwl/browser-image-compression
  */

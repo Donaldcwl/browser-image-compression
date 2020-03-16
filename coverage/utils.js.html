@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.64% </span>
+                <span class="strong">64.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>84/132</span>
+                <span class='fraction'>86/134</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.04% </span>
+                <span class="strong">39.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>20/54</span>
+                <span class='fraction'>23/58</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.49% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>82/118</span>
+                <span class='fraction'>84/120</span>
             </div>
         
             
@@ -347,7 +347,13 @@
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
 <a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -631,16 +637,20 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// add support for cordova-plugin-file
-const moduleMapper = typeof window !== 'undefined' &amp;&amp; window.cordova &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >window.cordova.require </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >window.cordova.require('cordova/modulemapper')</span>
-export const CustomFile = (moduleMapper &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >moduleMapper.getOriginalSymbol(window, 'File'))</span> || File
-export const CustomFileReader = (moduleMapper &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >moduleMapper.getOriginalSymbol(window, 'FileReader'))</span> || FileReader
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const isBrowser = typeof window !== 'undefined' // change browser environment to support SSR
+&nbsp;
+// add support for cordova-plugin-file
+const moduleMapper = isBrowser &amp;&amp; window.cordova &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >window.cordova.require </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >window.cordova.require('cordova/modulemapper')</span>
+export const CustomFile = isBrowser &amp;&amp; ((moduleMapper &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >moduleMapper.getOriginalSymbol(window, 'File'))</span> || File)
+export const CustomFileReader = isBrowser &amp;&amp; ((moduleMapper &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >moduleMapper.getOriginalSymbol(window, 'FileReader'))</span> || FileReader)
 &nbsp;
 /**
  * getDataUrlFromFile
@@ -900,7 +910,7 @@ export function getNewCanvasAndCtx (width, height) {
     canvas = new OffscreenCanvas(width, height)
 <span class="cstat-no" title="statement not covered" >    ctx = canvas.getContext('2d')</span>
 <span class="cstat-no" title="statement not covered" >    if (ctx === null) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error("getContext of OffscreenCanvas returns null")</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('getContext of OffscreenCanvas returns null')</span>
     }
   } catch (e) {
     canvas = document.createElement('canvas')
@@ -921,11 +931,13 @@ export function cleanupCanvasMemory (canvas) {
   canvas.height = 0
 }
 &nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>if (isBrowser) {
 // Polyfill for Number.isInteger
-Number.isInteger = Number.isInteger || <span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >fu</span>nction (value) {</span>
-<span class="cstat-no" title="statement not covered" >  return typeof value === 'number' &amp;&amp;</span>
-    isFinite(value) &amp;&amp;
-    Math.floor(value) === value
+  Number.isInteger = Number.isInteger || <span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >fu</span>nction (value) {</span>
+<span class="cstat-no" title="statement not covered" >    return typeof value === 'number' &amp;&amp;</span>
+      isFinite(value) &amp;&amp;
+      Math.floor(value) === value
+  }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -934,7 +946,7 @@ Number.isInteger = Number.isInteger || <span class="fstat-no" title="function no
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Mar 16 2020 12:52:28 GMT+0800 (Hong Kong Standard Time)
+                at Mon Mar 16 2020 16:08:11 GMT+0800 (Hong Kong Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
