@@ -54,7 +54,7 @@ const options = {
   fileType: string            // optional, fileType override
 }
 
-imageCompression(file: File, options): Promise<File>
+imageCompression(file: File, options): Promise<File | Blob>
 ```
 ### Helper function ###
 - for advanced user only, most user won't need to use the helper functions
