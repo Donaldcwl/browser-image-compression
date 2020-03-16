@@ -1,12 +1,16 @@
+## v1.0.8 (16 Mar 2020)
+* added: support for Server Side Rendering (SSR)
+* updated: ts type file
+
 ## v1.0.7 (15 Mar 2020)
-* add onProgress function in options for compression progress updates
-* allow fileType override
-* fix garbage clean canvas for safari
-* fix issue in Cordova support
-* fix issue in IE browser
-* fix other issues
-* useWebWorker default set to false
-* add ts type file
+* added: onProgress function in options for compression progress updates
+* added: allow fileType override
+* added: ts type file
+* updated: useWebWorker default set to false
+* fixed: garbage clean canvas for safari
+* fixed: issue in Cordova support
+* fixed: issue in IE browser
+* fixed: other issues
 
 ## v1.0.6 (5 July 2019)
 * fixed: exif orientation do not work in some situations
