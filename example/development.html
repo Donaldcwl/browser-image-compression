@@ -68,8 +68,8 @@ Options:<br />
     console.log('ExifOrientation', await imageCompression.getExifOrientation(file))
 
     var options = {
-      maxSizeMB: document.querySelector('#maxSizeMB').value,
-      maxWidthOrHeight: document.querySelector('#maxWidthOrHeight').value,
+      maxSizeMB: parseFloat(document.querySelector('#maxSizeMB').value),
+      maxWidthOrHeight: parseFloat(document.querySelector('#maxWidthOrHeight').value),
       useWebWorker: useWebWorker,
       onProgress: onProgress
     }
