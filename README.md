@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.8/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.9/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -80,7 +80,7 @@ async function handleImageUpload(event) {
   console.log('originalFile instanceof Blob', imageFile instanceof Blob); // true
   console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`);
 
-  var options = {
+  const options = {
     maxSizeMB: 1,
     maxWidthOrHeight: 1920,
     useWebWorker: true

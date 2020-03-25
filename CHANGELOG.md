@@ -1,3 +1,7 @@
+## v1.0.9 (25 Mar 2020)
+* updated: compression becomes less aggressive, output file is closer to the 'maxWidthOrHeight' and/or 'maxSizeMB' in config
+* fixed: file size increased in specific situation
+
 ## v1.0.8 (16 Mar 2020)
 * added: support for Server Side Rendering (SSR)
 * updated: ts type file
