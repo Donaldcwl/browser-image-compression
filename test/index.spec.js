@@ -149,6 +149,34 @@ describe('Tests', function () {
 
   })
 
+  it('resize png image file with maxWidth', async () => {
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
+
+    const maxWidth = 400
+
+    const compressedFile = await imageCompression(file, { maxWidth, useWebWorker: false, exifOrientation: -2 })
+
+    const temp = await drawFileInCanvas(compressedFile)
+
+    const img = temp[0]
+    expect(img.width).to.be.at.most(maxWidth)
+
+  })
+
+  it('resize png image file with maxHeight', async () => {
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
+
+    const maxHeight = 400
+
+    const compressedFile = await imageCompression(file, { maxHeight, useWebWorker: false, exifOrientation: -2 })
+
+    const temp = await drawFileInCanvas(compressedFile)
+
+    const img = temp[0]
+    expect(img.height).to.be.at.most(maxHeight)
+
+  })
+
   it('compress and resize png image file', async () => {
     const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' })
 

@@ -8,6 +8,10 @@ interface Options {
     maxSizeMB?: number;
     /** @default undefined */
     maxWidthOrHeight?: number;
+    /** @default undefined */
+    maxWidth?: number;
+    /** @default undefined */
+    maxHeight?: number;
     /** @default false */
     useWebWorker?: boolean;
     /** @default 10 */
