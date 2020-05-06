@@ -20,16 +20,16 @@ interface Options {
     fileType?: string;
 }
 
-declare function imageCompression (image: File | Blob, options: Options): Promise<File | Blob>;
+declare function imageCompression(image: File | Blob, options: Options): Promise<File | Blob>;
 
 declare namespace imageCompression {
-    export function getDataUrlFromFile (file: File): Promise<string>
-    export function getFilefromDataUrl (dataurl: string, filename: string, lastModified?: number): Promise<File | Blob>
-    export function loadImage (src: string): Promise<HTMLImageElement>
-    export function drawImageInCanvas (img: HTMLImageElement): HTMLCanvasElement | OffscreenCanvas
-    export function drawFileInCanvas (file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
-    export function canvasToFile (canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>
-    export function getExifOrientation (file: File): Promise<number>
+    function getDataUrlFromFile(file: File | Blob): Promise<string>;
+    function getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File | Blob>;
+    function loadImage(src: string): Promise<HTMLImageElement>;
+    function drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement;
+    function drawFileInCanvas(file: File | Blob): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>;
+    function canvasToFile(canvas: HTMLCanvasElement, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>;
+    function getExifOrientation(file: File | Blob): Promise<number>;
 }
 
 export as namespace imageCompression;
