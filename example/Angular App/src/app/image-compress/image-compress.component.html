@@ -1,0 +1,56 @@
+<p>look at console to see logs</p>
+Options:<br />
+<label for="maxSizeMB">maxSizeMB:
+  <input type="number"
+         id="#maxSizeMB"
+         name="maxSizeMB"
+         [(ngModel)]="maxSizeMB"/>
+</label>
+<br />
+<label for="maxWidthOrHeight">maxWidthOrHeight:
+  <input type="number"
+         id="maxWidthOrHeight"
+         name="maxWidthOrHeight"
+         [(ngModel)]="maxWidthOrHeight"/>
+</label>
+<hr>
+<div>
+  <label for="web-worker">
+    Compress in web-worker <span id="web-worker-progress">{{webWorkerProgress}}</span>
+    <input
+      id="web-worker"
+      type="file"
+      #webWorkerFile
+      accept="image/*"
+      (change)="compressImage(webWorkerFile.files[0], true)">
+  </label>
+  <p id="web-worker-log">
+    {{webWorkerLog}}
+    <a *ngIf="webWorkerDownloadLink" [href]="webWorkerDownloadLink" download="' + file.name + '">download compressed image</a>
+  </p>
+</div>
+<hr>
+<div>
+  <label for="main-thread">
+    Compress in main thread <span id="main-thread-progress"></span>
+    <input
+      id="main-thread"
+      type="file"
+      #mainThreadFile
+      accept="image/*"
+      (change)="compressImage(mainThreadFile.files[0], false)">
+  </label>
+  <p id="main-thread-log">
+    {{mainThreadLog}}
+  </p>
+</div>
+<table>
+  <tr>
+    <td>input preview</td>
+    <td>output preview</td>
+  </tr>
+  <tr>
+    <td><img id="preview" [src]="preview"/></td>
+    <td><img id="preview-after-compress" [src]="currentWebWorker ? webWorkerDownloadLink : mainThreadDownloadLink" /></td>
+  </tr>
+</table>
