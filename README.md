@@ -60,11 +60,11 @@ imageCompression(file: File, options): Promise<File | Blob>
 - for advanced user only, most user won't need to use the helper functions
 ```javascript
 imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
-imageCompression.getFilefromDataUrl(dataUrl: string): Promise<File>
+imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
 imageCompression.loadImage(url: string): Promise<HTMLImageElement>
-imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement
-imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>
-imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise<File|Blob>
+imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement | OffscreenCanvas
+imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
+imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
 ```
 
