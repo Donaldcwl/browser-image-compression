@@ -88,3 +88,4 @@ Temporary Items
 
 .idea/
 dist/
+/example/*/yarn.lock
