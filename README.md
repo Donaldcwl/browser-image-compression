@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.9/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.10/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -59,13 +59,13 @@ imageCompression(file: File, options): Promise<File | Blob>
 ### Helper function ###
 - for advanced user only, most user won't need to use the helper functions
 ```javascript
-imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
-imageCompression.getFilefromDataUrl(dataUrl: string): Promise<File>
+imageCompression.getDataUrlFromFile(file: File | Blob): Promise<base64 encoded string>
+imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
 imageCompression.loadImage(url: string): Promise<HTMLImageElement>
-imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement
-imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>
-imageCompression.canvasToFile(canvas, fileType, fileName, fileLastModified[, quality]): Promise<File|Blob>
-imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement | OffscreenCanvas
+imageCompression.drawFileInCanvas(file: File| Blob): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
+imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>
+imageCompression.getExifOrientation(file: File| Blob): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
 ```
 
 ## Usage ##
@@ -133,6 +133,13 @@ or check the "[example]" folder in this repo
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+
+## Typescript type definitions ##
+```
+npm install --save-dev @types/browser-image-compression
+or
+yarn add --dev @types/browser-image-compression
+```
 
 ## Contribution ##
 1. fork the repo and git clone it

@@ -1,3 +1,8 @@
+## v1.0.10 (7 May 2020)
+* fixed: issue in Web Worker when onProgress is undefined  [#50](https://github.com/Donaldcwl/browser-image-compression/issues/50) 
+* fixed: handle behavior change of exif orientation in iOS 13.4.1 and Safari 13.1 Desktop [#52](https://github.com/Donaldcwl/browser-image-compression/issues/52)
+* updated: typescript type definitions to resolve [#54](https://github.com/Donaldcwl/browser-image-compression/issues/54)
+
 ## v1.0.9 (25 Mar 2020)
 * updated: compression becomes less aggressive, output file is closer to the 'maxWidthOrHeight' and/or 'maxSizeMB' in config
 * fixed: file size increased in specific situation

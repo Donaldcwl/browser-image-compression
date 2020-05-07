@@ -1,0 +1,14 @@
+/* DashboardComponent's private CSS styles */
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  vertical-align: top;
+  width: 50%;
+}
+
+img {
+  max-width: 100%;
+}
