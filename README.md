@@ -134,6 +134,13 @@ or check the "[example]" folder in this repo
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
+## Typescript type definitions ##
+```
+npm install --save-dev @types/browser-image-compression
+or
+yarn add --dev @types/browser-image-compression
+```
+
 ## Contribution ##
 1. fork the repo and git clone it
 2. run `npm run watch` # it will watch code change in lib/ folder and generate js in dist/ folder
