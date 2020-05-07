@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.92% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/49</span>
+                <span class='fraction'>47/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.77% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>21/26</span>
+                <span class='fraction'>20/24</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.92% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/49</span>
+                <span class='fraction'>47/47</span>
             </div>
         
             
@@ -168,15 +168,7 @@
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
 <a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -206,15 +198,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
@@ -298,7 +286,8 @@
   followExifOrientation,
   getExifOrientation,
   getNewCanvasAndCtx,
-  handleMaxWidthOrHeight
+  handleMaxWidthOrHeight,
+  isAutoOrientationInBrowser
 } from './utils'
 &nbsp;
 /**
@@ -314,24 +303,17 @@
  * @param {string} [options.fileType] - default to be the original mime type from the image file
  * @returns {Promise&lt;File | Blob&gt;}
  */
-export default async function
-&nbsp;
-&nbsp;
-  fawfcompress (file, options) {
+export default async function compress (file, options) {
   let progress = 0
 &nbsp;
   function incProgress (inc = 5) {
     progress += inc
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof options.onProgress === 'function') {
-<span class="cstat-no" title="statement not covered" >      options.onProgress(Math.min(progress, 100))</span>
-    }
+    options.onProgress(Math.min(progress, 100))
   }
 &nbsp;
   function setProgress (p) {
     progress = Math.min(Math.max(p, progress), 100)
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof options.onProgress === 'function') {
-<span class="cstat-no" title="statement not covered" >      options.onProgress(progress)</span>
-    }
+    options.onProgress(progress)
   }
 &nbsp;
   let remainingTrials = options.maxIteration || 10
@@ -353,7 +335,7 @@ export default async function
   // exifOrientation
   options.exifOrientation = options.exifOrientation || <span class="branch-1 cbranch-no" title="branch not covered" >await getExifOrientation(file)</span>
   incProgress()
-  const orientationFixedCanvas = followExifOrientation(maxWidthOrHeightFixedCanvas, options.exifOrientation)
+  const orientationFixedCanvas = (await isAutoOrientationInBrowser) ? <span class="branch-0 cbranch-no" title="branch not covered" >maxWidthOrHeightFixedCanvas </span>: followExifOrientation(maxWidthOrHeightFixedCanvas, options.exifOrientation)
   incProgress()
 &nbsp;
   let quality = 1
@@ -415,7 +397,7 @@ export default async function
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 06 2020 16:10:33 GMT+0800 (香港標準時間)
+                at Thu May 07 2020 18:21:50 GMT+0800 (香港標準時間)
             </div>
         </div>
         <script src="prettify.js"></script>

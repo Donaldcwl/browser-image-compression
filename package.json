@@ -13,7 +13,7 @@
     "test": "cross-env NODE_ENV=test nyc mocha",
     "posttest": "npm run coverage-badges",
     "test:watch": "cross-env NODE_ENV=test nyc mocha -w",
-    "prepublish": "npm test && npm run build",
+    "prepublishOnly": "npm test && npm run build",
     "coverage-badges": "make-coverage-badge"
   },
   "homepage": "https://github.com/Donaldcwl/browser-image-compression#readme",
