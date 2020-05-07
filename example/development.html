@@ -51,7 +51,7 @@ Options:<br />
 
 
 <script>
-  async function compressImage (event, useWebWorker) {
+  function compressImage (event, useWebWorker) {
     var file = event.target.files[0]
     var logDom, progressDom
     if (useWebWorker) {
@@ -65,7 +65,9 @@ Options:<br />
 
     logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
     console.log('input', file)
-    console.log('ExifOrientation', await imageCompression.getExifOrientation(file))
+    imageCompression.getExifOrientation(file).then(function (o) {
+      console.log('ExifOrientation', o)
+    })
 
     var options = {
       maxSizeMB: parseFloat(document.querySelector('#maxSizeMB').value),
@@ -73,12 +75,14 @@ Options:<br />
       useWebWorker: useWebWorker,
       onProgress: onProgress
     }
-    const output = await imageCompression(file, options)
-    logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
-    console.log('output', output)
-    const downloadLink = URL.createObjectURL(output)
-    logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
-    document.getElementById('preview-after-compress').src = downloadLink
+    imageCompression(file, options).then(function (output) {
+      logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
+      console.log('output', output)
+      const downloadLink = URL.createObjectURL(output)
+      logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
+      document.getElementById('preview-after-compress').src = downloadLink
+    })
+
 
     // await uploadToServer(output)
 
@@ -96,6 +100,7 @@ Options:<br />
     })
   }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
 <script type="text/javascript" src="../dist/browser-image-compression.js"></script>
 </body>
 </html>

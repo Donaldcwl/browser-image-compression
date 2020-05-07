@@ -1,3 +1,6 @@
+## v1.0.11 (8 May 2020)
+* fixed: issue with IE support [#38](https://github.com/Donaldcwl/browser-image-compression/issues/38) [#23](https://github.com/Donaldcwl/browser-image-compression/issues/23)
+
 ## v1.0.10 (7 May 2020)
 * fixed: issue in Web Worker when onProgress is undefined  [#50](https://github.com/Donaldcwl/browser-image-compression/issues/50) 
 * fixed: handle behavior change of exif orientation in iOS 13.4.1 and Safari 13.1 Desktop [#52](https://github.com/Donaldcwl/browser-image-compression/issues/52)

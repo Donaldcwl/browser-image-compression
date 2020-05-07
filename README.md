@@ -134,6 +134,16 @@ or check the "[example]" folder in this repo
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
+## IE support ##
+Promise API is being used in this library. If you need to support browser that do not support Promise like IE. You can include the Promise polyfill in your project.
+
+See: https://github.com/taylorhakes/promise-polyfill
+
+You can include the following script to load the Promise polyfill:
+```html
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+```
+
 ## Typescript type definitions ##
 ```
 npm install --save-dev @types/browser-image-compression
