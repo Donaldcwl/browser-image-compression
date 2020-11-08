@@ -1,4 +1,4 @@
-## v1.0.13 (11 Aug 2020)
+## v1.0.13 (8 Nov 2020)
 * added: new option for setting initial quality level [#64](https://github.com/Donaldcwl/browser-image-compression/issues/64), [#78](https://github.com/Donaldcwl/browser-image-compression/issues/78)
 * fixed: options object being altered by the compress func [#71](https://github.com/Donaldcwl/browser-image-compression/pull/71)
 * fixed: issue with output size of png compression [#57](https://github.com/Donaldcwl/browser-image-compression/issues/57)
