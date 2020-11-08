@@ -10,6 +10,7 @@
     "eslint": "eslint lib test",
     "build": "rollup -c --environment BUILD:production",
     "watch": "rollup -c -w",
+    "dev": "npm run watch",
     "test": "cross-env NODE_ENV=test nyc mocha",
     "posttest": "npm run coverage-badges",
     "test:watch": "cross-env NODE_ENV=test nyc mocha -w",
