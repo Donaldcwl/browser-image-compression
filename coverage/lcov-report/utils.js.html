@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.67% </span>
+                <span class="strong">43.55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/60</span>
+                <span class='fraction'>27/62</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.38% </span>
+                <span class="strong">72.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>93/136</span>
+                <span class='fraction'>93/129</span>
             </div>
         
             
@@ -377,25 +377,7 @@
 <a name='L318'></a><a href='#L318'>318</a>
 <a name='L319'></a><a href='#L319'>319</a>
 <a name='L320'></a><a href='#L320'>320</a>
-<a name='L321'></a><a href='#L321'>321</a>
-<a name='L322'></a><a href='#L322'>322</a>
-<a name='L323'></a><a href='#L323'>323</a>
-<a name='L324'></a><a href='#L324'>324</a>
-<a name='L325'></a><a href='#L325'>325</a>
-<a name='L326'></a><a href='#L326'>326</a>
-<a name='L327'></a><a href='#L327'>327</a>
-<a name='L328'></a><a href='#L328'>328</a>
-<a name='L329'></a><a href='#L329'>329</a>
-<a name='L330'></a><a href='#L330'>330</a>
-<a name='L331'></a><a href='#L331'>331</a>
-<a name='L332'></a><a href='#L332'>332</a>
-<a name='L333'></a><a href='#L333'>333</a>
-<a name='L334'></a><a href='#L334'>334</a>
-<a name='L335'></a><a href='#L335'>335</a>
-<a name='L336'></a><a href='#L336'>336</a>
-<a name='L337'></a><a href='#L337'>337</a>
-<a name='L338'></a><a href='#L338'>338</a>
-<a name='L339'></a><a href='#L339'>339</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L321'></a><a href='#L321'>321</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -457,7 +439,7 @@
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">23901981x</span>
+<span class="cline-any cline-yes">24015727x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
@@ -541,9 +523,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -657,28 +636,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -742,7 +706,7 @@ export const CustomFileReader = isBrowser &amp;&amp; ((moduleMapper &amp;&amp; <
 &nbsp;
 // Check if browser supports automatic image orientation
 // see https://github.com/blueimp/JavaScript-Load-Image/blob/1e4df707821a0afcc11ea0720ee403b8759f3881/js/load-image-orientation.js#L37-L53
-export const isAutoOrientationInBrowser = (async () =&gt; {
+export const isAutoOrientationInBrowser = isBrowser &amp;&amp; (async () =&gt; {
   // black 2x1 JPEG, with the following meta information set:
   // EXIF Orientation: 6 (Rotated 90° CCW)
   const testImageURL =
@@ -791,7 +755,7 @@ export function getFilefromDataUrl (dataUrl, filename, lastModified = Date.now()
   return new Promise((resolve) =&gt; {
     const arr = dataUrl.split(',')
     const mime = arr[0].match(/:(.*?);/)[1]
-    const bstr = atob(arr[1])
+    const bstr = window.atob(arr[1])
     let n = bstr.length
     const u8arr = new Uint8Array(n)
     while (n--) {
@@ -874,14 +838,11 @@ export async function drawFileInCanvas (file) {
  */
 export async function canvasToFile (canvas, fileType, fileName, fileLastModified, quality = 1) {
   let file
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof OffscreenCanvas === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >canvas instanceof OffscreenCanvas)</span> { // checked on Win Chrome 83, MacOS Chrome 83
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof OffscreenCanvas === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >canvas instanceof OffscreenCanvas)</span> {
 <span class="cstat-no" title="statement not covered" >    file = await canvas.convertToBlob({ type: fileType, quality })</span>
 <span class="cstat-no" title="statement not covered" >    file.name = fileName</span>
 <span class="cstat-no" title="statement not covered" >    file.lastModified = fileLastModified</span>
-  // some browser do not support quality parameter, see: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
-  // } else if (typeof canvas.toBlob === 'function') {
-  //   file = await new Promise(resolve =&gt; canvas.toBlob(resolve, fileType, quality))
-  } else { // checked on Win Edge 44, Win IE 11, Win Firefox 76, MacOS Firefox 77, MacOS Safari 13.1
+  } else {
     const dataUrl = canvas.toDataURL(fileType, quality)
     file = await getFilefromDataUrl(dataUrl, fileName, fileLastModified)
   }
@@ -995,29 +956,14 @@ export function followExifOrientation (canvas, exifOrientation) {
 &nbsp;
   // transform context before drawing image
   switch (exifOrientation) {
-<span class="branch-0 cbranch-no" title="branch not covered" >    case 2:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(-1, 0, 0, 1, width, 0)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-1 cbranch-no" title="branch not covered" >    case 3:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(-1, 0, 0, -1, width, height)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >    case 4:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(1, 0, 0, -1, 0, height)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-3 cbranch-no" title="branch not covered" >    case 5:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(0, 1, 1, 0, 0, 0)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-4 cbranch-no" title="branch not covered" >    case 6:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(0, 1, -1, 0, height, 0)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-5 cbranch-no" title="branch not covered" >    case 7:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(0, -1, -1, 0, height, width)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-<span class="branch-6 cbranch-no" title="branch not covered" >    case 8:</span>
-<span class="cstat-no" title="statement not covered" >      ctx.transform(0, -1, 1, 0, 0, width)</span>
-<span class="cstat-no" title="statement not covered" >      break</span>
-    default:
-      break
+<span class="branch-0 cbranch-no" title="branch not covered" >    case 2: <span class="cstat-no" title="statement not covered" >ctx.transform(-1, 0, 0, 1, width, 0); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-1 cbranch-no" title="branch not covered" >    case 3: <span class="cstat-no" title="statement not covered" >ctx.transform(-1, 0, 0, -1, width, height); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-2 cbranch-no" title="branch not covered" >    case 4: <span class="cstat-no" title="statement not covered" >ctx.transform(1, 0, 0, -1, 0, height); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-3 cbranch-no" title="branch not covered" >    case 5: <span class="cstat-no" title="statement not covered" >ctx.transform(0, 1, 1, 0, 0, 0); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-4 cbranch-no" title="branch not covered" >    case 6: <span class="cstat-no" title="statement not covered" >ctx.transform(0, 1, -1, 0, height, 0); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-5 cbranch-no" title="branch not covered" >    case 7: <span class="cstat-no" title="statement not covered" >ctx.transform(0, -1, -1, 0, height, width); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+<span class="branch-6 cbranch-no" title="branch not covered" >    case 8: <span class="cstat-no" title="statement not covered" >ctx.transform(0, -1, 1, 0, 0, width); <span class="cstat-no" title="statement not covered" ></span>break;</span></span>
+    default: break;
   }
 &nbsp;
   ctx.drawImage(canvas, 0, 0, width, height)
@@ -1078,7 +1024,7 @@ export function cleanupCanvasMemory (canvas) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Jun 16 2020 19:18:40 GMT+0300 (Moscow Standard Time)
+                at Thu Jun 04 2020 13:37:49 GMT+0800 (香港標準時間)
             </div>
         </div>
         <script src="prettify.js"></script>

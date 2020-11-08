@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.11/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -51,7 +51,8 @@ const options = {
   maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
   exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
   onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
-  fileType: string            // optional, fileType override
+  fileType: string,           // optional, fileType override
+  initialQuality: number      // optional, initial quality value during compression 
 }
 
 imageCompression(file: File, options): Promise<File | Blob>

@@ -1,3 +1,6 @@
+## v1.0.12 (4 June 2020)
+* fixed: issue with SSR [#58](https://github.com/Donaldcwl/browser-image-compression/issues/58)
+
 ## v1.0.11 (8 May 2020)
 * fixed: issue with IE support [#38](https://github.com/Donaldcwl/browser-image-compression/issues/38) [#23](https://github.com/Donaldcwl/browser-image-compression/issues/23)
 

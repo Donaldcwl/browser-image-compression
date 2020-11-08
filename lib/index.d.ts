@@ -18,6 +18,8 @@ interface Options {
     onProgress?: (progress: number) => void;
     /** Default to be the original mime type from the image file */
     fileType?: string;
+    /** @default 1.0 */
+    initialQuality?: number;
 }
 
 declare function imageCompression(image: File | Blob, options: Options): Promise<File | Blob>;
