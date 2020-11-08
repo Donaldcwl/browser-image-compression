@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+browser-image-compression@<span id="version">#.#.#</span>
 <p>look at console to see logs</p>
 Options:<br />
 <label for="maxSizeMB">maxSizeMB: <input type="number" id="maxSizeMB" name="maxSizeMB" value="1" /></label><br />
@@ -50,7 +51,10 @@ Options:<br />
 </style>
 
 
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+<script type="text/javascript" src="../dist/browser-image-compression.js"></script>
 <script>
+  document.querySelector('#version').innerHTML = imageCompression.version
   function compressImage (event, useWebWorker) {
     var file = event.target.files[0]
     var logDom, progressDom
@@ -81,10 +85,10 @@ Options:<br />
       const downloadLink = URL.createObjectURL(output)
       logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
       document.getElementById('preview-after-compress').src = downloadLink
+      // uploadToServer(output)
     })
 
 
-    // await uploadToServer(output)
 
     function onProgress (p) {
       progressDom.innerHTML = '(' + p + '%' + ')'
@@ -93,14 +97,12 @@ Options:<br />
 
   function uploadToServer (file) {
     var formData = new FormData()
-    formData.append('image', file)
+    formData.append('image', file, file.name)
     return fetch('http://localhost/image-upload-api', {
       method: 'POST',
       body: formData
     })
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-<script type="text/javascript" src="../dist/browser-image-compression.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.12/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -37,7 +37,7 @@ or
 
 #### In html file ####
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js"></script>
 ```
 
 ## API ##
@@ -47,11 +47,14 @@ or
 const options = { 
   maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
   maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+  onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
   useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+
+  // following options are for advanced user
   maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
   exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
-  onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
-  fileType: string            // optional, fileType override
+  fileType: string,           // optional, fileType override
+  initialQuality: number      // optional, initial quality value between 0 and 1 (default: 1)
 }
 
 imageCompression(file: File, options): Promise<File | Blob>
