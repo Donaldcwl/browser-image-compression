@@ -51,7 +51,8 @@ const options = {
   maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
   exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
   onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
-  fileType: string            // optional, fileType override
+  fileType: string,           // optional, fileType override
+  initialQuality: number      // optional, initial quality value during compression 
 }
 
 imageCompression(file: File, options): Promise<File | Blob>
