@@ -81,10 +81,10 @@ Options:<br />
       const downloadLink = URL.createObjectURL(output)
       logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
       document.getElementById('preview-after-compress').src = downloadLink
+      // uploadToServer(output)
     })
 
 
-    // await uploadToServer(output)
 
     function onProgress (p) {
       progressDom.innerHTML = '(' + p + '%' + ')'
@@ -93,7 +93,7 @@ Options:<br />
 
   function uploadToServer (file) {
     var formData = new FormData()
-    formData.append('image', file)
+    formData.append('image', file, file.name)
     return fetch('http://localhost/image-upload-api', {
       method: 'POST',
       body: formData
