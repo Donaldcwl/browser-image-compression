@@ -1,6 +1,6 @@
 // Type definitions for browser-image-compression 1.0
 // Project: https://github.com/Donaldcwl/browser-image-compression
-// Definitions by: Donald <https://github.com/Donaldcwl>
+// Definitions by: Donald <https://github.com/Donaldcwl> & Jamie Haywood <https://github.com/jamiehaywood>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 interface Options {
@@ -22,16 +22,16 @@ interface Options {
     initialQuality?: number;
 }
 
-declare function imageCompression(image: File | Blob, options: Options): Promise<File | Blob>;
+declare function imageCompression(image: File, options: Options): Promise<File>;
 
 declare namespace imageCompression {
-    function getDataUrlFromFile(file: File | Blob): Promise<string>;
-    function getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File | Blob>;
+    function getDataUrlFromFile(file: File): Promise<string>;
+    function getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>;
     function loadImage(src: string): Promise<HTMLImageElement>;
     function drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement;
-    function drawFileInCanvas(file: File | Blob): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>;
-    function canvasToFile(canvas: HTMLCanvasElement, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>;
-    function getExifOrientation(file: File | Blob): Promise<number>;
+    function drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>;
+    function canvasToFile(canvas: HTMLCanvasElement, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>;
+    function getExifOrientation(file: File): Promise<number>;
 }
 
 export as namespace imageCompression;
