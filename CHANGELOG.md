@@ -1,3 +1,8 @@
+## v1.0.14 (6 Jan 2021)
+* updated: use UZIP to compress PNG image instead of Canvas
+* fixed: PNG transparent background become black after compression [#84](https://github.com/Donaldcwl/browser-image-compression/issues/84), [#76](https://github.com/Donaldcwl/browser-image-compression/issues/76)
+* fixed: progress jump back to 0 when Web Worker failback to main thread [#90](https://github.com/Donaldcwl/browser-image-compression/issues/90)
+
 ## v1.0.13 (8 Nov 2020)
 * added: new option for setting initial quality level [#64](https://github.com/Donaldcwl/browser-image-compression/issues/64), [#78](https://github.com/Donaldcwl/browser-image-compression/issues/78)
 * fixed: options object being altered by the compress func [#71](https://github.com/Donaldcwl/browser-image-compression/pull/71)
