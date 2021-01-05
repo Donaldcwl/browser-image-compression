@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.95% </span>
+                <span class="strong">88.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/42</span>
+                <span class='fraction'>31/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.67% </span>
+                <span class="strong">68.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/24</span>
+                <span class='fraction'>13/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.95% </span>
+                <span class="strong">88.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/42</span>
+                <span class='fraction'>31/35</span>
             </div>
         
             
@@ -215,24 +215,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -316,24 +316,24 @@ async function imageCompression (file, options) {
   // try run in web worker, fall back to run in main thread
   const inWebWorker = typeof WorkerGlobalScope !== 'undefined' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >self instanceof WorkerGlobalScope</span>
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if ((useWebWorker &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof Worker === 'function')</span> || inWebWorker) {
-<span class="cstat-no" title="statement not covered" >    console.log('run compression in web worker')</span>
-  } else {
-    console.log('run compression in main thread')
-  }
+  // if ((useWebWorker &amp;&amp; typeof Worker === 'function') || inWebWorker) {
+  //   console.log('run compression in web worker')
+  // } else {
+  //   console.log('run compression in main thread')
+  // }
 &nbsp;
   <span class="missing-if-branch" title="if path not taken" >I</span>if (useWebWorker &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof Worker === 'function' </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >!inWebWorker)</span> {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      console.log(1)</span>
+      // console.log(1)
       // "compressOnWebWorker" is kind of like a recursion to call "imageCompression" again inside web worker
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compressOnWebWorker(file, options)</span>
     } catch (e) {
-<span class="cstat-no" title="statement not covered" >      console.warn('Run compression in web worker failed:', e, ', fall back to main thread')</span>
-<span class="cstat-no" title="statement not covered" >      console.log(1.5)</span>
+      // console.warn('Run compression in web worker failed:', e, ', fall back to main thread')
+      // console.log(1.5)
 <span class="cstat-no" title="statement not covered" >      compressedFile = await compress(file, options)</span>
     }
   } else {
-    console.log(2)
+    // console.log(2)
     compressedFile = await compress(file, options)
   }
 &nbsp;
@@ -367,7 +367,7 @@ export default imageCompression
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jan 06 2021 01:34:08 GMT+0800 (Hong Kong Standard Time)
+                at Wed Jan 06 2021 01:44:51 GMT+0800 (Hong Kong Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
