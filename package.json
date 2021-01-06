@@ -38,7 +38,6 @@
     "dist"
   ],
   "dependencies": {
-    "upng-js": "2.1.0",
     "uzip": "0.20201231.0"
   },
   "devDependencies": {
