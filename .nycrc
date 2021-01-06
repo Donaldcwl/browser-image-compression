@@ -5,7 +5,8 @@
     "lib/**/*.js"
   ],
   "exclude": [
-    "lib/web-worker.js"
+    "lib/web-worker.js",
+    "lib/UPNG.js"
   ],
   "reporter": [
     "text",

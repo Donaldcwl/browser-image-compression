@@ -50,25 +50,25 @@ const options = {
   onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
   useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
 
-  // following options are for advanced user
+  // following options are for advanced users
   maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
   exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
   fileType: string,           // optional, fileType override
   initialQuality: number      // optional, initial quality value between 0 and 1 (default: 1)
 }
 
-imageCompression(file: File, options): Promise<File | Blob>
+imageCompression(file: File, options): Promise<File>
 ```
 ### Helper function ###
-- for advanced user only, most user won't need to use the helper functions
+- for advanced users only, most users won't need to use the helper functions
 ```javascript
-imageCompression.getDataUrlFromFile(file: File | Blob): Promise<base64 encoded string>
+imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
 imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
 imageCompression.loadImage(url: string): Promise<HTMLImageElement>
 imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement | OffscreenCanvas
-imageCompression.drawFileInCanvas(file: File| Blob): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
-imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File | Blob>
-imageCompression.getExifOrientation(file: File| Blob): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
+imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
+imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
 ```
 
 ## Usage ##
@@ -148,11 +148,7 @@ You can include the following script to load the Promise polyfill:
 ```
 
 ## Typescript type definitions ##
-```
-npm install --save-dev @types/browser-image-compression
-or
-yarn add --dev @types/browser-image-compression
-```
+Typescript definitions are included in the package & referenced in the `types` section of the `package.json`
 
 ## Contribution ##
 1. fork the repo and git clone it
