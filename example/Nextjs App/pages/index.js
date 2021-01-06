@@ -78,10 +78,12 @@ export default class App extends React.Component {
   }
 
   render () {
+    const version = imageCompression.version
     const { webWorker, mainThread, maxSizeMB, maxWidthOrHeight } = this.state
     return (
       <div className="App">
         <div>
+          browser-image-compression@<span>{version}</span><br />
           Options:<br />
           <label htmlFor="maxSizeMB">maxSizeMB: <input type="number" id="maxSizeMB" name="maxSizeMB"
                                                        value={maxSizeMB}
@@ -106,7 +108,7 @@ export default class App extends React.Component {
               <span>Source image size: {webWorker.inputSize} mb</span>
             )}
             {webWorker.outputSize && (
-              <span>, Output image size: {webWorker.outputSize}</span>
+              <span>, Output image size: {webWorker.outputSize} mb</span>
             )}
           </p>
         </div>
@@ -126,7 +128,7 @@ export default class App extends React.Component {
               <span>Source image size: {mainThread.inputSize} mb</span>
             )}
             {mainThread.outputSize && (
-              <span>, Output image size: {mainThread.outputSize}</span>
+              <span>, Output image size: {mainThread.outputSize} mb</span>
             )}
           </p>
         </div>
