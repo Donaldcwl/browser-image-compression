@@ -1,5 +1,5 @@
 ## v1.0.15 (unknown)
-* fixed: Test suites in few projects may have error, added extra checking on whether File and FileReader exist in the Window object[#92](https://github.com/Donaldcwl/browser-image-compression/issues/92)
+* fixed: Test suites in few projects may have error, added extra checking on whether File and FileReader exist in the Window object [#92](https://github.com/Donaldcwl/browser-image-compression/issues/92)
 
 ## v1.0.14 (6 Jan 2021)
 * updated: use UZIP to compress PNG image instead of Canvas
