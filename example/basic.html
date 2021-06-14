@@ -85,9 +85,9 @@ Options:<br />
         const downloadLink = URL.createObjectURL(output)
         logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
         document.getElementById('preview-after-compress').src = downloadLink
+        return uploadToServer(output)
     })
 
-    // await uploadToServer(output)
 
     function onProgress (p) {
       progressDom.innerHTML = '(' + p + '%' + ')'
@@ -95,12 +95,15 @@ Options:<br />
   }
 
   function uploadToServer (file) {
-    var formData = new FormData()
-    formData.append('image', file)
-    return fetch('http://localhost/image-upload-api', {
+    const formData = new FormData()
+    formData.append('image', file, file.name)
+    const url = 'http://localhost:3000/image-upload-api'
+    console.log('calling api', url, 'with data', Array.from(formData.entries())[0])
+    return fetch(url, {
       method: 'POST',
       body: formData
-    })
+    }).then(res => res.json())
+      .then(body => console.log('got server response', body))
   }
 </script>
 </body>
