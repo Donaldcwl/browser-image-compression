@@ -137,6 +137,9 @@ or check the "[example]" folder in this repo
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
+## Notes for compression to work in Web Worker
+The browser need to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If browser do not support "OffscreenCanvas" API, main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
+
 ## IE support ##
 Promise API is being used in this library. If you need to support browser that do not support Promise like IE. You can include the Promise polyfill in your project.
 
