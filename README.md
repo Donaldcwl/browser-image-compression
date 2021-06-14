@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.15/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -37,7 +37,7 @@ or
 
 #### In html file ####
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.13/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.15/dist/browser-image-compression.js"></script>
 ```
 
 ## API ##
@@ -137,7 +137,7 @@ or check the "[example]" folder in this repo
 | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
-## Notes for compression to work in Web Worker
+## Remarks for compression to work in Web Worker
 The browser need to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If browser do not support "OffscreenCanvas" API, main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
 
 ## IE support ##
