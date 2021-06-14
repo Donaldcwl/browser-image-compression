@@ -92,3 +92,5 @@ dist/
 
 .next/
 build/
+
+example-express-server/uploads/
