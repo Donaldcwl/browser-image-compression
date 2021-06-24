@@ -23,6 +23,11 @@ or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
 
+## Support
+If this project help you reduce time to develop, you can buy me a cup of coffee :)
+
+<a href="https://www.buymeacoffee.com/donaldcwl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
+
 ## How to use this module in your project? ##
 #### Use as ES module ####
 
@@ -162,11 +167,6 @@ Typescript definitions are included in the package & referenced in the `types` s
 6. `npm run test`
 7. push to your forked repo on github
 8. make a pull request to this repo
-
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :)
-
-<a href="https://www.buymeacoffee.com/donaldcwl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
 
 [dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
 [example]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example
