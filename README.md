@@ -52,6 +52,8 @@ or
 const options = { 
   maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
   maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+                              // but, automatically reduce the size to smaller than the maximum Canvas size supported by each browser.
+                              // Please check the Cabeat part for details.
   onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
   useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
 
@@ -64,6 +66,20 @@ const options = {
 
 imageCompression(file: File, options): Promise<File>
 ```
+
+#### Caveat ####
+Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a Canvas object. <br/>
+So, we resize the image to less than the maximum size that each browser restricts. <br/>
+(However, the `proportion/ratio` of the image remains.)
+
+| Browser | Maximum height | Maximum width | Maximum area |
+|---|---|---|---|
+| Chrome | 32,767 pixels | 32,767 pixels | 268,435,456 pixels (i.e., 16,384 x 16,384) |
+| Firefox | 32,767 pixels | 32,767 pixels | 472,907,776 pixels (i.e., 22,528 x 20,992) |
+| Safari | 32,767 pixels | 32,767 pixels | 268,435,456 pixels (i.e., 16,384 x 16,384) |
+| IE | 8,192 pixels | 8,192 pixels | ? |
+| Etc | ? | ? | ? |
+
 ### Helper function ###
 - for advanced users only, most users won't need to use the helper functions
 ```javascript

@@ -10,7 +10,8 @@ import path from 'path'
 const pkg = require('./package.json')
 const notExternal = [
   // 'pako',
-  'uzip'
+  'uzip',
+  'bowser',
 ]
 const external = Object.keys(pkg.dependencies).filter(value => !notExternal.includes(value))
 
@@ -19,7 +20,7 @@ let plugins = [
   babel(),
   terser({
     keep_fnames: true,
-    mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP'] }
+    mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP', 'bowser'] }
   }),
   license({
     sourcemap: true,
@@ -46,7 +47,8 @@ export default {
       sourcemap: true,
       globals: {
         // pako: 'pako',
-        uzip: 'UZIP'
+        uzip: 'UZIP',
+        bowser: 'bowser'
       }
     },
     {
@@ -55,8 +57,10 @@ export default {
       sourcemap: true,
       globals: {
         // pako: 'pako',
-        uzip: 'UZIP'
+        uzip: 'UZIP',
+        bowser: 'bowser'
       }
-    }
+    },
+
   ]
 }
