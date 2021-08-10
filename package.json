@@ -39,6 +39,7 @@
     "dist"
   ],
   "dependencies": {
+    "bowser": "^2.11.0",
     "uzip": "0.20201231.0"
   },
   "devDependencies": {
