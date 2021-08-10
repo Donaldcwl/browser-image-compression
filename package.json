@@ -15,7 +15,8 @@
     "posttest": "npm run coverage-badges",
     "test:watch": "cross-env NODE_ENV=test nyc mocha -w",
     "prepublishOnly": "npm test && npm run build",
-    "coverage-badges": "make-coverage-badge"
+    "coverage-badges": "make-coverage-badge",
+    "commit": "cz"
   },
   "homepage": "https://github.com/Donaldcwl/browser-image-compression#readme",
   "repository": {
@@ -53,6 +54,7 @@
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^6.8.0",
     "istanbul": "^0.4.5",
     "jsdom": "^15.1.1",
@@ -66,5 +68,10 @@
     "rollup-plugin-nodent": "^0.2.2",
     "rollup-plugin-terser": "^5.0.0",
     "rollup-plugin-uglify": "^6.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
