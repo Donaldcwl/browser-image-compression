@@ -1,4 +1,6 @@
 ## v1.0.15 (unknown)
+* fixed: Fixed black Images and type error by considering Canvas maximum size supported by different browsers [#84](https://github.com/Donaldcwl/browser-image-compression/issues/84), [#36](https://github.com/Donaldcwl/browser-image-compression/issues/36)
+* fixed: IE compatibility, include polyfill with core-js@3 e.g, globalThis, Promise [#108](https://github.com/Donaldcwl/browser-image-compression/issues/108), [#110](https://github.com/Donaldcwl/browser-image-compression/issues/110)
 * fixed: Test suites in few projects may have error, added extra checking on whether File and FileReader exist in the Window object [#92](https://github.com/Donaldcwl/browser-image-compression/issues/92)
 
 ## v1.0.14 (6 Jan 2021)
