@@ -18,7 +18,7 @@ yarn add browser-image-compression
 ```
 or use a CDN like [delivrjs]:
 ```
-https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.14/dist/browser-image-compression.js
+https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.15/dist/browser-image-compression.js
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
@@ -42,7 +42,7 @@ or
 
 #### In html file ####
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.14/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.15/dist/browser-image-compression.js"></script>
 ```
 
 ## API ##
@@ -153,16 +153,6 @@ or check the "[example]" folder in this repo
 ## Remarks for compression to work in Web Worker
 The browser need to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If browser do not support "OffscreenCanvas" API, main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
 
-## IE support ##
-Promise API is being used in this library. If you need to support browser that do not support Promise like IE. You can include the Promise polyfill in your project.
-
-See: https://github.com/taylorhakes/promise-polyfill
-
-You can include the following script to load the Promise polyfill:
-```html
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-```
-
 ## Typescript type definitions ##
 Typescript definitions are included in the package & referenced in the `types` section of the `package.json`
 
@@ -174,7 +164,7 @@ Typescript definitions are included in the package & referenced in the `types` s
 5. add/update test in test/ folder
 6. `npm run test`
 7. push to your forked repo on github
-8. make a pull request to this repo
+8. make a pull request to dev branch of this repo
 
 [dist]: https://github.com/Donaldcwl/browser-image-compression/tree/master/dist
 [example]: https://github.com/Donaldcwl/browser-image-compression/tree/master/example

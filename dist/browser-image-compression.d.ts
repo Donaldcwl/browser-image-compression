@@ -36,4 +36,4 @@ declare namespace imageCompression {
 
 export as namespace imageCompression;
 
-export = imageCompression;
+export default imageCompression;
