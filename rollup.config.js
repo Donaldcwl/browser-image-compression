@@ -1,26 +1,25 @@
-import babel from 'rollup-plugin-babel'
-import { terser } from 'rollup-plugin-terser'
-import nodent from 'rollup-plugin-nodent'
-import license from 'rollup-plugin-license'
-import copy from 'rollup-plugin-copy'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import path from 'path'
+import babel from 'rollup-plugin-babel';
+import { terser } from 'rollup-plugin-terser';
+import nodent from 'rollup-plugin-nodent';
+import license from 'rollup-plugin-license';
+import copy from 'rollup-plugin-copy';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import path from 'path';
 
-const pkg = require('./package.json')
+const pkg = require('./package.json');
+
 const notExternal = [
-  // 'pako',
   'uzip',
-  'bowser',
-]
-const external = Object.keys(pkg.dependencies).filter(value => !notExternal.includes(value))
+];
+const external = Object.keys(pkg.dependencies).filter((value) => !notExternal.includes(value));
 
-let plugins = [
+const plugins = [
   nodent({ noRuntime: true, promises: true }),
   babel(),
   terser({
     keep_fnames: true,
-    mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP', 'bowser'] }
+    mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP'] },
   }),
   license({
     sourcemap: true,
@@ -28,17 +27,17 @@ let plugins = [
   }),
   copy({
     targets: [
-      { src: 'lib/index.d.ts', dest: path.dirname(pkg.types) , rename: path.basename(pkg.types) }
-    ]
+      { src: 'lib/index.d.ts', dest: path.dirname(pkg.types), rename: path.basename(pkg.types) },
+    ],
   }),
   nodeResolve(),
-  commonjs()
-]
+  commonjs(),
+];
 
 export default {
   input: 'lib/index.js',
-  plugins: plugins,
-  external: external,
+  plugins,
+  external,
   output: [
     {
       file: pkg.main,
@@ -46,21 +45,17 @@ export default {
       format: 'umd',
       sourcemap: true,
       globals: {
-        // pako: 'pako',
         uzip: 'UZIP',
-        bowser: 'bowser'
-      }
+      },
     },
     {
       file: pkg.module,
       format: 'es',
       sourcemap: true,
       globals: {
-        // pako: 'pako',
         uzip: 'UZIP',
-        bowser: 'bowser'
-      }
+      },
     },
 
-  ]
-}
+  ],
+};
