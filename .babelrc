@@ -1,8 +1,10 @@
 {
   "presets": [
     ["@babel/preset-env", {
+      "useBuiltIns": "usage",
+      "corejs": "3",
       "targets": {
-        "browsers": ["> 0.25%", "not dead"]
+        "browsers": ["> 5%", "ie 10-11", "not dead"]
       }
     }]
   ],
