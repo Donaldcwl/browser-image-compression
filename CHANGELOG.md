@@ -1,7 +1,8 @@
-## v1.0.15 (unknown)
+## v1.0.15 (12 Aug 2021)
 * fixed: Fixed black Images and type error by considering Canvas maximum size supported by different browsers [#84](https://github.com/Donaldcwl/browser-image-compression/issues/84), [#36](https://github.com/Donaldcwl/browser-image-compression/issues/36)
 * fixed: IE compatibility, include polyfill with core-js@3 e.g, globalThis, Promise [#108](https://github.com/Donaldcwl/browser-image-compression/issues/108), [#110](https://github.com/Donaldcwl/browser-image-compression/issues/110)
 * fixed: Test suites in few projects may have error, added extra checking on whether File and FileReader exist in the Window object [#92](https://github.com/Donaldcwl/browser-image-compression/issues/92)
+* fixed: issue with export causing compile error in typescript project [#63](https://github.com/Donaldcwl/browser-image-compression/issues/63)
 
 ## v1.0.14 (6 Jan 2021)
 * updated: use UZIP to compress PNG image instead of Canvas
@@ -13,7 +14,7 @@
 * fixed: options object being altered by the compress func [#71](https://github.com/Donaldcwl/browser-image-compression/pull/71)
 * fixed: issue with output size of png compression [#57](https://github.com/Donaldcwl/browser-image-compression/issues/57)
 
-## v1.0.12 (4 June 2020)
+## v1.0.12 (4 Jun 2020)
 * fixed: issue with SSR [#58](https://github.com/Donaldcwl/browser-image-compression/issues/58)
 
 ## v1.0.11 (8 May 2020)
@@ -42,10 +43,10 @@
 * fixed: issue in IE browser
 * fixed: other issues
 
-## v1.0.6 (5 July 2019)
+## v1.0.6 (5 Jul 2019)
 * fixed: exif orientation do not work in some situations
 
-## v1.0.5 (1 June 2019)
+## v1.0.5 (1 Jun 2019)
 * added: support for cordova project that uses cordova-plugin-file
 * optimized: follow image exif orientation even though image do not required to compress or resize
 * fixed: error may throw on iPhone Safari because of OffscreenCanvas cannot get 2d context
