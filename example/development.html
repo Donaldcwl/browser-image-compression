@@ -51,7 +51,6 @@ Options:<br />
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
 <script type="text/javascript" src="../dist/browser-image-compression.js"></script>
 <script>
   document.querySelector('#version').innerHTML = imageCompression.version
@@ -96,15 +95,15 @@ Options:<br />
   }
 
   function uploadToServer (file) {
-    const formData = new FormData()
-    formData.append('image', file, file.name)
-    const url = 'http://localhost:3000/image-upload-api'
-    console.log('calling api', url, 'with data', Array.from(formData.entries())[0])
-    return fetch(url, {
-      method: 'POST',
-      body: formData
-    }).then(res => res.json())
-      .then(body => console.log('got server response', body))
+    // const formData = new FormData()
+    // formData.append('image', file, file.name)
+    // const url = 'http://localhost:3000/image-upload-api'
+    // console.log('calling api', url, 'with data', Array.from(formData.entries())[0])
+    // return fetch(url, {
+    //   method: 'POST',
+    //   body: formData
+    // }).then(res => res.json())
+    //   .then(body => console.log('got server response', body))
   }
 </script>
 </body>
