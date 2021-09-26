@@ -1,37 +1,58 @@
-import babel from 'rollup-plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import nodent from 'rollup-plugin-nodent';
 import license from 'rollup-plugin-license';
 import copy from 'rollup-plugin-copy';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import path from 'path';
 
 const pkg = require('./package.json');
 
-const notExternal = [
-  'uzip',
-];
-const external = Object.keys(pkg.dependencies).filter((value) => !notExternal.includes(value));
+const isProduction = process.env.BUILD === 'production';
+
+const notExternal = ['uzip'];
+const external = Object.keys(pkg.dependencies).filter(
+  (value) => !notExternal.includes(value),
+);
+external.push(/@babel\/runtime/);
 
 const plugins = [
-  nodent({ noRuntime: true, promises: true }),
-  babel(),
-  terser({
-    keep_fnames: true,
-    mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP'] },
+  replace({
+    preventAssignment: true,
+    values: {
+      'process.env.NODE_ENV': JSON.stringify(process.env.BUILD),
+      'process.env.BUILD': JSON.stringify(process.env.BUILD),
+      __buildDate__: () => JSON.stringify(new Date()),
+      __buildVersion__: JSON.stringify(pkg.version),
+    },
   }),
+  isProduction && nodent({ noRuntime: true, promises: true }),
+  nodeResolve(),
+  commonjs(),
+  babel({
+    babelHelpers: 'bundled',
+  }),
+  isProduction
+    && terser({
+      keep_fnames: true,
+      mangle: { reserved: ['CustomFile', 'CustomFileReader', 'UPNG', 'UZIP'] },
+    }),
   license({
     sourcemap: true,
-    banner: '<%= _.startCase(pkg.name) %>\nv<%= pkg.version %>\nby <%= pkg.author %>\n<%= pkg.repository.url %>',
+    banner:
+      '<%= _.startCase(pkg.name) %>\nv<%= pkg.version %>\nby <%= pkg.author %>\n<%= pkg.repository.url %>',
   }),
   copy({
     targets: [
-      { src: 'lib/index.d.ts', dest: path.dirname(pkg.types), rename: path.basename(pkg.types) },
+      {
+        src: 'lib/index.d.ts',
+        dest: path.dirname(pkg.types),
+        rename: path.basename(pkg.types),
+      },
     ],
   }),
-  nodeResolve(),
-  commonjs(),
 ];
 
 export default {
@@ -56,6 +77,5 @@ export default {
         uzip: 'UZIP',
       },
     },
-
   ],
 };
