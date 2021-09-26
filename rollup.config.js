@@ -16,7 +16,6 @@ const notExternal = ['uzip'];
 const external = Object.keys(pkg.dependencies).filter(
   (value) => !notExternal.includes(value),
 );
-external.push(/@babel\/runtime/);
 
 const plugins = [
   replace({
