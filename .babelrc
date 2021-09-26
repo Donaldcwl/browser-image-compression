@@ -1,12 +1,17 @@
 {
+  "targets": {
+    "browsers": ["> 5%", "ie 10-11", "not dead"]
+  },
   "presets": [
-    ["@babel/preset-env", {
-      "useBuiltIns": "usage",
-      "corejs": "3",
-      "targets": {
-        "browsers": ["> 5%", "ie 10-11", "not dead"]
-      }
+    ["@babel/preset-env"]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime", {
+      "corejs": 3
     }]
+    // ["polyfill-corejs3", {
+    //   "method": "usage-pure"
+    // }]
   ],
   "env": {
     "test": {
