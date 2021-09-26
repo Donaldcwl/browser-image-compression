@@ -27,8 +27,8 @@ const plugins = [
       __buildVersion__: JSON.stringify(pkg.version),
     },
   }),
-  isProduction && nodent({ noRuntime: true, promises: true }),
   nodeResolve(),
+  nodent({ noRuntime: true, promises: true }),
   commonjs(),
   babel({
     babelHelpers: 'bundled',
