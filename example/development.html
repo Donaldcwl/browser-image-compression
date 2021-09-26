@@ -87,6 +87,9 @@ Options:<br />
         document.getElementById('preview-after-compress').src = downloadLink
         return uploadToServer(output)
       })
+      .catch(function (error) {
+        alert(error.message)
+      })
       
     function onProgress (p) {
       console.log('onProgress', p)
