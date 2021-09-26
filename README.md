@@ -78,7 +78,7 @@ So, we resize the image to less than the maximum size that each browser restrict
 imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
 imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
 imageCompression.loadImage(url: string): Promise<HTMLImageElement>
-imageCompression.drawImageInCanvas(img: HTMLImageElement): HTMLCanvasElement | OffscreenCanvas
+imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HTMLCanvasElement | OffscreenCanvas
 imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
 imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024

@@ -1,3 +1,8 @@
+## v1.0.16 (26 Sep 2021)
+* fixed: Fixed output white picture on iOS Safari for large image because of canvas max size [#116](https://github.com/Donaldcwl/browser-image-compression/issues/116)
+* fixed: Fixed wrong image orientation on iOS device [#118](https://github.com/Donaldcwl/browser-image-compression/issues/118)
+* feature: set white background for transparent png file with jpeg file extension [#119](https://github.com/Donaldcwl/browser-image-compression/issues/119)
+
 ## v1.0.15 (12 Aug 2021)
 * fixed: Fixed black Images and type error by considering Canvas maximum size supported by different browsers [#84](https://github.com/Donaldcwl/browser-image-compression/issues/84), [#36](https://github.com/Donaldcwl/browser-image-compression/issues/36)
 * fixed: IE compatibility, include polyfill with core-js@3 e.g, globalThis, Promise [#108](https://github.com/Donaldcwl/browser-image-compression/issues/108), [#110](https://github.com/Donaldcwl/browser-image-compression/issues/110)

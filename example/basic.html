@@ -78,14 +78,18 @@ Options:<br />
       useWebWorker: useWebWorker,
       onProgress: onProgress
     }
-    imageCompression(file, options).then(function (output) {
-        logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
-        console.log('output', output)
-        const downloadLink = URL.createObjectURL(output)
-        logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
-        document.getElementById('preview-after-compress').src = downloadLink
-        return uploadToServer(output)
-    })
+    imageCompression(file, options)
+      .then(function (output) {
+          logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
+          console.log('output', output)
+          const downloadLink = URL.createObjectURL(output)
+          logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
+          document.getElementById('preview-after-compress').src = downloadLink
+          return uploadToServer(output)
+      })
+      .catch(function (error) {
+        alert(error.message)
+      })
 
 
     function onProgress (p) {
