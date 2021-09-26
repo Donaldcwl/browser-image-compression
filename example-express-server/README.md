@@ -15,7 +15,7 @@ yarn dev
 ## Sample frontend HTML
 ```html
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.15/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.16/dist/browser-image-compression.js"></script>
 <input type="file" accept="image/*" onchange="compressImage(event);">
 <script>
     function compressImage (event) {
