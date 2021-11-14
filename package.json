@@ -1,6 +1,6 @@
 {
   "name": "browser-image-compression",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Compress images in the browser",
   "main": "dist/browser-image-compression.js",
   "module": "dist/browser-image-compression.mjs",
