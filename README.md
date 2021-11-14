@@ -49,7 +49,7 @@ or
 ### Main function ###
 ```javascript
 // you should provide one of maxSizeMB, maxWidthOrHeight in the options
-const options = { 
+const options: Options = { 
   maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
   maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
                               // but, automatically reduce the size to smaller than the maximum Canvas size supported by each browser.
@@ -64,7 +64,7 @@ const options = {
   initialQuality: number      // optional, initial quality value between 0 and 1 (default: 1)
 }
 
-imageCompression(file: File, options): Promise<File>
+imageCompression(file: File, options: Options): Promise<File>
 ```
 
 #### Caveat ####
@@ -79,7 +79,7 @@ imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
 imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
 imageCompression.loadImage(url: string): Promise<HTMLImageElement>
 imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HTMLCanvasElement | OffscreenCanvas
-imageCompression.drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
+imageCompression.drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
 imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
 ```
