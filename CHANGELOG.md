@@ -1,3 +1,6 @@
+## v1.0.17 (15 Nov 2021)
+* feature: apply white background to transparent PNG > JPG conversion if options.fileType is image/jpeg or image/jpg [#119](https://github.com/Donaldcwl/browser-image-compression/issues/119)
+* fixed: Fixed image cropped on Safari [#118](https://github.com/Donaldcwl/browser-image-compression/issues/118)
 ## v1.0.16 (26 Sep 2021)
 * fixed: Fixed output white picture on iOS Safari for large image because of canvas max size [#116](https://github.com/Donaldcwl/browser-image-compression/issues/116)
 * fixed: Fixed wrong image orientation on iOS device [#118](https://github.com/Donaldcwl/browser-image-compression/issues/118)

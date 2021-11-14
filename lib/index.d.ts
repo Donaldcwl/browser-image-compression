@@ -29,7 +29,7 @@ declare namespace imageCompression {
     function getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>;
     function loadImage(src: string): Promise<HTMLImageElement>;
     function drawImageInCanvas(img: HTMLImageElement, fileType?: string): HTMLCanvasElement;
-    function drawFileInCanvas(file: File): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>;
+    function drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement]>;
     function canvasToFile(canvas: HTMLCanvasElement, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>;
     function getExifOrientation(file: File): Promise<number>;
 }
