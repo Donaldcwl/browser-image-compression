@@ -8,7 +8,10 @@ Javascript module to be run in the web browser for image compression.
 ## Features ##
 - You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
 - **Multi-thread** (web worker) non-blocking compression are supported through options.
+## Demo / Example ##
+open https://donaldcwl.github.io/browser-image-compression/example/basic.html
 
+or check the "[example]" folder in this repo
 ## Install ##
 You can download imageCompression from the [dist folder][dist]. Alternatively, you can install it via yarn or npm
 ```
@@ -22,11 +25,6 @@ https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.17/dist/browser-image
 or
 https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js
 ```
-
-## Support
-If this project help you reduce time to develop, you can buy me a cup of coffee :)
-
-<a href="https://www.buymeacoffee.com/donaldcwl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
 
 ## How to use this module in your project? ##
 #### Use as ES module ####
@@ -43,45 +41,6 @@ or
 #### In html file ####
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.17/dist/browser-image-compression.js"></script>
-```
-
-## API ##
-### Main function ###
-```javascript
-// you should provide one of maxSizeMB, maxWidthOrHeight in the options
-const options: Options = { 
-  maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
-  maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
-                              // but, automatically reduce the size to smaller than the maximum Canvas size supported by each browser.
-                              // Please check the Caveat part for details.
-  onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
-  useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
-
-  // following options are for advanced users
-  maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
-  exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
-  fileType: string,           // optional, fileType override
-  initialQuality: number      // optional, initial quality value between 0 and 1 (default: 1)
-}
-
-imageCompression(file: File, options: Options): Promise<File>
-```
-
-#### Caveat ####
-Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a Canvas object. <br/>
-So, we resize the image to less than the maximum size that each browser restricts. <br/>
-(However, the `proportion/ratio` of the image remains.)
-
-### Helper function ###
-- for advanced users only, most users won't need to use the helper functions
-```javascript
-imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
-imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
-imageCompression.loadImage(url: string): Promise<HTMLImageElement>
-imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HTMLCanvasElement | OffscreenCanvas
-imageCompression.drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
-imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
-imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
 ```
 
 ## Usage ##
@@ -139,10 +98,48 @@ function handleImageUpload(event) {
 }
 ```
 
-## Demo / Example ##
-open https://donaldcwl.github.io/browser-image-compression/example/basic.html
+## Support
+If this project help you reduce time to develop, you can buy me a cup of coffee :)
 
-or check the "[example]" folder in this repo
+<a href="https://donaldcwl.github.io/donation/" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
+## API ##
+### Main function ###
+```javascript
+// you should provide one of maxSizeMB, maxWidthOrHeight in the options
+const options: Options = { 
+  maxSizeMB: number,          // (default: Number.POSITIVE_INFINITY)
+  maxWidthOrHeight: number,   // compressedFile will scale down by ratio to a point that width or height is smaller than maxWidthOrHeight (default: undefined)
+                              // but, automatically reduce the size to smaller than the maximum Canvas size supported by each browser.
+                              // Please check the Caveat part for details.
+  onProgress: Function,       // optional, a function takes one progress argument (percentage from 0 to 100) 
+  useWebWorker: boolean,      // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+
+  // following options are for advanced users
+  maxIteration: number,       // optional, max number of iteration to compress the image (default: 10)
+  exifOrientation: number,    // optional, see https://stackoverflow.com/a/32490603/10395024
+  fileType: string,           // optional, fileType override
+  initialQuality: number      // optional, initial quality value between 0 and 1 (default: 1)
+}
+
+imageCompression(file: File, options: Options): Promise<File>
+```
+
+#### Caveat ####
+Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a Canvas object. <br/>
+So, we resize the image to less than the maximum size that each browser restricts. <br/>
+(However, the `proportion/ratio` of the image remains.)
+
+### Helper function ###
+- for advanced users only, most users won't need to use the helper functions
+```javascript
+imageCompression.getDataUrlFromFile(file: File): Promise<base64 encoded string>
+imageCompression.getFilefromDataUrl(dataUrl: string, filename: string, lastModified?: number): Promise<File>
+imageCompression.loadImage(url: string): Promise<HTMLImageElement>
+imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HTMLCanvasElement | OffscreenCanvas
+imageCompression.drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
+imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
+imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+```
 
 ## Browsers support
 
