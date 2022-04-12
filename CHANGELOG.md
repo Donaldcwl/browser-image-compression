@@ -1,3 +1,10 @@
+## v2.0.0 (13 Apr 2022)
+* docs: add CSS animation to example html for showing main thread status
+* feature: support AbortController (abort / cancel during compression) [#101](https://github.com/Donaldcwl/browser-image-compression/issues/101)
+* feature: options.alwaysKeepResolution (default: false) - keep the resolution (width and height) during compression and reduce the quality only (note that options.maxWidthOrHeight is still applied if set) [#127](https://github.com/Donaldcwl/browser-image-compression/issues/127)
+* updated: dropped core-js to reduce bundle size [#138](https://github.com/Donaldcwl/browser-image-compression/issues/138)
+* updated: options.useWebWorker default set to true
+
 ## v1.0.17 (15 Nov 2021)
 * feature: apply white background to transparent PNG > JPG conversion if options.fileType is image/jpeg or image/jpg [#119](https://github.com/Donaldcwl/browser-image-compression/issues/119)
 * fixed: Fixed image cropped on Safari [#118](https://github.com/Donaldcwl/browser-image-compression/issues/118)
