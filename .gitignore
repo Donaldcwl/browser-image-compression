@@ -94,3 +94,5 @@ dist/
 build/
 
 example-express-server/uploads/
+
+stats.html
