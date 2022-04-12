@@ -2,6 +2,7 @@
 * docs: add CSS animation to example html for showing main thread status
 * feature: support AbortController (abort / cancel during compression) [#101](https://github.com/Donaldcwl/browser-image-compression/issues/101)
 * feature: options.alwaysKeepResolution (default: false) - keep the resolution (width and height) during compression and reduce the quality only (note that options.maxWidthOrHeight is still applied if set) [#127](https://github.com/Donaldcwl/browser-image-compression/issues/127)
+* fixed: Main thread is blocked on Mac device for options.useWebWorker=true [#139](https://github.com/Donaldcwl/browser-image-compression/issues/139)
 * updated: dropped core-js to reduce bundle size [#138](https://github.com/Donaldcwl/browser-image-compression/issues/138)
 * updated: options.useWebWorker default set to true
 
