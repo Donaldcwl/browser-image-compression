@@ -1,14 +1,13 @@
-// Type definitions for browser-image-compression 1.0
+// Type definitions for browser-image-compression 2.0
 // Project: https://github.com/Donaldcwl/browser-image-compression
 // Definitions by: Donald <https://github.com/Donaldcwl> & Jamie Haywood <https://github.com/jamiehaywood>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 interface Options {
     /** @default Number.POSITIVE_INFINITY */
     maxSizeMB?: number;
     /** @default undefined */
     maxWidthOrHeight?: number;
-    /** @default false */
+    /** @default true */
     useWebWorker?: boolean;
     /** @default 10 */
     maxIteration?: number;
