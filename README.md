@@ -6,8 +6,8 @@
 Javascript module to be run in the web browser for image compression.
 
 ## Features
-- You can use this module to compress jpeg and png image by reducing **resolution** or **storage size** before uploading to application server to save bandwidth.
-- **Multi-thread** (web worker) non-blocking compression are supported through options.
+- You can use this module to compress jpeg and png images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
+- **Multi-thread** (web worker) non-blocking compression is supported through options.
 
 
 ## Upgrade to version 2
@@ -89,9 +89,9 @@ yarn add browser-image-compression
 ```javascript
 import imageCompression from 'browser-image-compression';
 ```
-(can be used in framework like React, Angular, Vue etc)
+(can be used in frameworks like React, Angular, Vue etc)
 
-(work with bundler like webpack and rollup)
+(work with bundlers like webpack and rollup)
 
 ### (or) Load UMD js file:
 You can download imageCompression from the [dist folder][dist].
@@ -103,7 +103,7 @@ Alternatively, you can use a CDN like [delivrjs]:
 
 
 ## Support
-If this project help you reduce time to develop, you can buy me a cup of coffee :)
+If this project helps you reduce the time to develop, you can buy me a cup of coffee :)
 
 <a href="https://donaldcwl.github.io/donation/" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
 
@@ -185,7 +185,7 @@ imageCompression.getExifOrientation(file: File): Promise<number> // based on htt
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 ### IE support
-This library uses ES feature such as Promise API, globalThis. If you need to support browser that do not support new ES feature like IE. You can include the core-js polyfill in your project.
+This library uses ES features such as Promise API, globalThis. If you need to support browsers that do not support new ES features like IE. You can include the core-js polyfill in your project.
 
 You can include the following script to load the core-js polyfill:
 ```html
@@ -194,7 +194,7 @@ You can include the following script to load the core-js polyfill:
 
 
 ## Remarks for compression to work in Web Worker
-The browser need to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If browser do not support "OffscreenCanvas" API, main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
+The browser needs to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If the browser does not support "OffscreenCanvas" API, the main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
 
 
 ## Typescript type definitions
