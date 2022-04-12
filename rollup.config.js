@@ -7,6 +7,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const pkg = require('./package.json');
 
@@ -51,6 +52,11 @@ const plugins = [
         rename: path.basename(pkg.types),
       },
     ],
+  }),
+  visualizer({
+    open: false,
+    gzipSize: true,
+    brotliSize: true,
   }),
 ];
 
