@@ -19,6 +19,8 @@ interface Options {
     fileType?: string;
     /** @default 1.0 */
     initialQuality?: number;
+    /** @default false */
+    alwaysKeepResolution?: boolean;
 }
 
 declare function imageCompression(image: File, options: Options): Promise<File>;
