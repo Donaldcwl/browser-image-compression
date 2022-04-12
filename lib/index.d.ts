@@ -21,6 +21,8 @@ interface Options {
     initialQuality?: number;
     /** @default false */
     alwaysKeepResolution?: boolean;
+    /** @default undefined */
+    signal?: AbortSignal;
 }
 
 declare function imageCompression(image: File, options: Options): Promise<File>;
