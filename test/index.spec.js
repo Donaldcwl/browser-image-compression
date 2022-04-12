@@ -3,6 +3,8 @@ import path from 'path';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import imageCompression from '../lib';
+import BROWSER_NAME from '../lib/config/browser-name';
+import MAX_CANVAS_SIZE from '../lib/config/max-canvas-size';
 
 const {
   drawImageInCanvas, getDataUrlFromFile, getFilefromDataUrl, loadImage, getExifOrientation, drawFileInCanvas,
@@ -23,7 +25,11 @@ chai.use(chaiAsPromised);
 describe('Tests', function () {
   this.timeout(30000);
 
+  const navigator = global.navigator;
+
   beforeEach(() => {
+    global.navigator = navigator;
+    imageCompression.getBrowserName.cachedResult = undefined;
   });
 
   it('get File from jpg base64', async () => {
@@ -202,6 +208,97 @@ describe('Tests', function () {
     const file = new File(JPG_FILE, JPG_NAME);
     const orientation = await getExifOrientation(file);
     expect(orientation).to.equal(-2);
+  });
+
+  it('alwaysKeepResolution', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+
+    const maxSizeMB = 1;
+
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB,
+      useWebWorker: false,
+      exifOrientation: -2,
+      alwaysKeepResolution: true,
+    });
+
+    const temp1 = await drawFileInCanvas(file);
+    const img1 = temp1[0];
+    const temp2 = await drawFileInCanvas(compressedFile);
+    const img2 = temp2[0];
+    expect(img2.width).to.equal(img1.width);
+    expect(img2.height).to.equal(img1.height);
+  });
+
+  it('abort compression', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+
+    const maxSizeMB = 1;
+
+    const controller = new AbortController();
+
+    setTimeout(() => {
+      controller.abort(new Error('I just want to stop'));
+    }, 0);
+
+    expect(imageCompression(file, {
+      maxSizeMB,
+      useWebWorker: false,
+      exifOrientation: -2,
+      signal: controller.signal,
+    })).to.eventually.rejectedWith(/I just want to stop/);
+  });
+
+  it('getBrowserName Chrome', async () => {
+    global.navigator = { userAgent: 'Chrome' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.CHROME);
+  });
+
+  it('getBrowserName iPhone', async () => {
+    global.navigator = { userAgent: 'WebKit iPhone' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.MOBILE_SAFARI);
+  });
+
+  it('getBrowserName Safari', async () => {
+    global.navigator = { userAgent: 'Safari' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.DESKTOP_SAFARI);
+  });
+
+  it('getBrowserName Firefox', async () => {
+    global.navigator = { userAgent: 'Firefox' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.FIREFOX);
+  });
+
+  it('getBrowserName MSIE', async () => {
+    global.navigator = { userAgent: 'MSIE' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.IE);
+  });
+
+  it('getBrowserName Other', async () => {
+    global.navigator = { userAgent: 'Other' };
+    const browserName = imageCompression.getBrowserName();
+    expect(browserName).to.equal(BROWSER_NAME.ETC);
+  });
+
+  it('approximateBelowMaximumCanvasSizeOfBrowser', async () => {
+    global.navigator = { userAgent: 'Chrome' };
+    const browserName = imageCompression.getBrowserName();
+    const maximumCanvasSize = MAX_CANVAS_SIZE[browserName];
+    const { width, height } = imageCompression.approximateBelowMaximumCanvasSizeOfBrowser(maximumCanvasSize * 1.2, maximumCanvasSize * 1.3);
+    expect(width * height).to.be.lessThanOrEqual(maximumCanvasSize * maximumCanvasSize);
+  });
+
+  it('approximateBelowMaximumCanvasSizeOfBrowser 2', async () => {
+    global.navigator = { userAgent: 'Chrome' };
+    const browserName = imageCompression.getBrowserName();
+    const maximumCanvasSize = MAX_CANVAS_SIZE[browserName];
+    const { width, height } = imageCompression.approximateBelowMaximumCanvasSizeOfBrowser(maximumCanvasSize * 1.3, maximumCanvasSize * 1.2);
+    expect(width * height).to.be.lessThanOrEqual(maximumCanvasSize * maximumCanvasSize);
   });
 
   afterEach(() => {
