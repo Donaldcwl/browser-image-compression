@@ -5,7 +5,16 @@
   <div>
     <span class="animation"></span>
   </div>
-  browser-image-compression@<span id="version">#.#.#</span>
+  browser-image-compression@<span id="version">loading...</span>
+  <select onchange="changeVersion(event)">
+    <option value="2.0.0">2.0.0</option>
+    <option value="1.0.17">1.0.17</option>
+    <option value="1.0.16">1.0.16</option>
+    <option value="1.0.15">1.0.15</option>
+    <option value="1.0.14">1.0.14</option>
+    <option value="1.0.13">1.0.13</option>
+    <option value="1.0.12">1.0.12</option>
+  </select>
   <p>look at console to see logs</p>
   Options:<br />
   <label for="maxSizeMB">maxSizeMB:
@@ -89,8 +98,18 @@
     integrity="sha512-U2gvuX8NaNSc0MOOvd1CTMp/kuzhlJ8HJKWF4G8JAw66iH+1keU5Mrzzrnqktf1SphOCow6dy69sTdblJdI8mA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+    src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"></script>
   <script>
+    function changeVersion(event) {
+      document.querySelector("#version").innerHTML = 'loading...';
+      const script = document.createElement('script');
+      script.src = "https://cdn.jsdelivr.net/npm/browser-image-compression@"+event.srcElement.value+"/dist/browser-image-compression.js";
+      document.body.appendChild(script);
+      script.addEventListener('load', () => {
+        document.querySelector("#version").innerHTML = imageCompression.version;
+      });
+    }
+
     var controller
     document.querySelector("#version").innerHTML = imageCompression.version;
     function compressImage(event, useWebWorker) {
