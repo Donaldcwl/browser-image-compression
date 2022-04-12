@@ -1,113 +1,171 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-browser-image-compression@<span id="version">#.#.#</span>
-<p>look at console to see logs</p>
-Options:<br />
-<label for="maxSizeMB">maxSizeMB: <input type="number" id="maxSizeMB" name="maxSizeMB" value="1" /></label><br />
-<label for="maxWidthOrHeight">maxWidthOrHeight: <input type="number" id="maxWidthOrHeight" name="maxWidthOrHeight"
-                                                       value="1024" /></label>
-<hr>
-<div>
+  <div>
+    <span class="animation"></span>
+  </div>
+  browser-image-compression@<span id="version">#.#.#</span>
+  <p>look at console to see logs</p>
+  Options:<br />
+  <label for="maxSizeMB">maxSizeMB:
+    <input type="number" id="maxSizeMB" name="maxSizeMB" value="1" /></label><br />
+  <label for="maxWidthOrHeight">maxWidthOrHeight:
+    <input type="number" id="maxWidthOrHeight" name="maxWidthOrHeight" value="1024" /></label>
+  <hr />
+  <div>
     <label for="web-worker">
-        Compress in web-worker <span id="web-worker-progress"></span>
-        <input id="web-worker" type="file" accept="image/*" onchange="compressImage(event, true);">
+      Compress in web-worker <span id="web-worker-progress"></span>
+      <input id="web-worker" type="file" accept="image/*" onchange="compressImage(event, true);" />
     </label>
     <p id="web-worker-log"></p>
-</div>
-<hr>
-<div>
+  </div>
+  <hr />
+  <div>
     <label for="main-thread">
-        Compress in main thread <span id="main-thread-progress"></span>
-        <input id="main-thread" type="file" accept="image/*" onchange="compressImage(event, false);">
+      Compress in main thread <span id="main-thread-progress"></span>
+      <input id="main-thread" type="file" accept="image/*" onchange="compressImage(event, false);" />
     </label>
     <p id="main-thread-log"></p>
-</div>
-<table>
-    <tr>
+  </div>
+  <div>
+    <button onclick="abort()">Abort</button>
+  </div>
+  <!-- <table>
+      <tr>
         <td>input preview</td>
         <td>output preview</td>
-    </tr>
-    <tr>
+      </tr>
+      <tr>
         <td><img id="preview" /></td>
         <td><img id="preview-after-compress" /></td>
-    </tr>
-</table>
+      </tr>
+    </table> -->
 
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
+  <style>
+    .animation {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgb(0, 153, 255);
+      animation: left-right 2s ease-in-out infinite;
+    }
+
+    @keyframes left-right {
+      0% {
+        background-color: rgb(0, 153, 255);
+        transform: translateX(0%)
+      }
+
+      50% {
+        background-color: rgb(255, 53, 0);
+        transform: translateX(calc(min(300px, 100vw)))
+      }
+
+      100% {
+        transform: translateX(0%)
+      }
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
     }
 
     td {
-        vertical-align: top;
-        width: 50%;
+      vertical-align: top;
+      width: 50%;
     }
 
     img {
-        max-width: 100%;
+      max-width: 100%;
     }
-</style>
+  </style>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.21.1/minified.min.js"
+    integrity="sha512-U2gvuX8NaNSc0MOOvd1CTMp/kuzhlJ8HJKWF4G8JAw66iH+1keU5Mrzzrnqktf1SphOCow6dy69sTdblJdI8mA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+  <script>
+    var controller
+    document.querySelector("#version").innerHTML = imageCompression.version;
+    function compressImage(event, useWebWorker) {
+      var file = event.target.files[0];
+      var logDom, progressDom;
+      if (useWebWorker) {
+        logDom = document.querySelector("#web-worker-log");
+        progressDom = document.querySelector("#web-worker-progress");
+      } else {
+        logDom = document.querySelector("#main-thread-log");
+        progressDom = document.querySelector("#main-thread-progress");
+      }
+      // document.getElementById("preview").src = URL.createObjectURL(file);
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@1.0.17/dist/browser-image-compression.js"></script>
-<script>
-  document.querySelector('#version').innerHTML = imageCompression.version
-  function compressImage (event, useWebWorker) {
-    var file = event.target.files[0]
-    var logDom, progressDom
-    if (useWebWorker) {
-      logDom = document.querySelector('#web-worker-log')
-      progressDom = document.querySelector('#web-worker-progress')
-    } else {
-      logDom = document.querySelector('#main-thread-log')
-      progressDom = document.querySelector('#main-thread-progress')
+      logDom.innerHTML =
+        "Source image size:" + (file.size / 1024 / 1024).toFixed(2) + "mb";
+      console.log("input", file);
+      imageCompression.getExifOrientation(file).then(function (o) {
+        console.log("ExifOrientation", o);
+      });
+
+      controller = typeof AbortController !== 'undefined' && new AbortController();
+
+      var options = {
+        maxSizeMB: parseFloat(document.querySelector("#maxSizeMB").value),
+        maxWidthOrHeight: parseFloat(
+          document.querySelector("#maxWidthOrHeight").value
+        ),
+        useWebWorker: useWebWorker,
+        onProgress: onProgress,
+      };
+      if (controller) {
+        options.signal = controller.signal;
+      }
+      imageCompression(file, options)
+        .then(function (output) {
+          logDom.innerHTML +=
+            ", output size:" + (output.size / 1024 / 1024).toFixed(2) + "mb";
+          console.log("output", output);
+          const downloadLink = URL.createObjectURL(output);
+          logDom.innerHTML +=
+            '&nbsp;<a href="' +
+            downloadLink +
+            '" download="' +
+            file.name +
+            '">download compressed image</a>';
+          // document.getElementById('preview-after-compress').src = downloadLink
+          return uploadToServer(output);
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
+
+      function onProgress(p) {
+        console.log("onProgress", p);
+        progressDom.innerHTML = "(" + p + "%" + ")";
+      }
     }
-    document.getElementById('preview').src = URL.createObjectURL(file)
 
-    logDom.innerHTML = 'Source image size:' + (file.size / 1024 / 1024).toFixed(2) + 'mb'
-    console.log('input', file)
-    imageCompression.getExifOrientation(file).then(function (o) {
-      console.log('ExifOrientation', o)
-    })
-
-    var options = {
-      maxSizeMB: parseFloat(document.querySelector('#maxSizeMB').value),
-      maxWidthOrHeight: parseFloat(document.querySelector('#maxWidthOrHeight').value),
-      useWebWorker: useWebWorker,
-      onProgress: onProgress
+    function abort() {
+      if (!controller) return
+      controller.abort(new Error('I just want to stop'));
     }
-    imageCompression(file, options)
-      .then(function (output) {
-          logDom.innerHTML += ', output size:' + (output.size / 1024 / 1024).toFixed(2) + 'mb'
-          console.log('output', output)
-          const downloadLink = URL.createObjectURL(output)
-          logDom.innerHTML += '&nbsp;<a href="' + downloadLink + '" download="' + file.name + '">download compressed image</a>'
-          document.getElementById('preview-after-compress').src = downloadLink
-          return uploadToServer(output)
-      })
-      .catch(function (error) {
-        alert(error.message)
-      })
 
-
-    function onProgress (p) {
-      progressDom.innerHTML = '(' + p + '%' + ')'
+    function uploadToServer(file) {
+      // const formData = new FormData()
+      // formData.append('image', file, file.name)
+      // const url = 'http://localhost:3000/image-upload-api'
+      // return fetch(url, {
+      //   method: 'POST',
+      //   body: formData
+      // }).then(res => res.json())
+      //   .then(body => console.log('got server response', body))
     }
-  }
-
-  function uploadToServer (file) {
-    // const formData = new FormData()
-    // formData.append('image', file, file.name)
-    // const url = 'http://localhost:3000/image-upload-api'
-    // console.log('calling api', url, 'with data', Array.from(formData.entries())[0])
-    // return fetch(url, {
-    //   method: 'POST',
-    //   body: formData
-    // }).then(res => res.json())
-    //   .then(body => console.log('got server response', body))
-  }
-</script>
+  </script>
 </body>
+
 </html>
