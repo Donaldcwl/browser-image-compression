@@ -1,11 +1,11 @@
-import React from 'react'
-import imageCompression from 'browser-image-compression'
+import React from 'react';
+import imageCompression from 'browser-image-compression';
 
 export default class App extends React.Component {
-  constructor (...args) {
-    super(...args)
-    this.compressImage = this.compressImage.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+  constructor(...args) {
+    super(...args);
+    this.compressImage = this.compressImage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1024,
@@ -14,72 +14,74 @@ export default class App extends React.Component {
         inputSize: null,
         outputSize: null,
         inputUrl: null,
-        outputUrl: null
+        outputUrl: null,
       },
       mainThread: {
         progress: null,
         inputSize: null,
         outputSize: null,
         inputUrl: null,
-        outputUrl: null
-      }
-    }
+        outputUrl: null,
+      },
+    };
   }
 
-  handleChange (target) {
+  handleChange(target) {
     return (e) => {
-      this.setState({ [target]: e.currentTarget.value })
-    }
+      this.setState({ [target]: e.currentTarget.value });
+    };
   }
 
-  onProgress (p, useWebWorker) {
-    const targetName = useWebWorker ? 'webWorker' : 'mainThread'
-    this.setState(prevState => ({
+  onProgress(p, useWebWorker) {
+    const targetName = useWebWorker ? 'webWorker' : 'mainThread';
+    this.setState((prevState) => ({
       ...prevState,
       [targetName]: {
         ...prevState[targetName],
-        progress: p
-      }
-    }))
+        progress: p,
+      },
+    }));
   }
 
-  async compressImage (event, useWebWorker) {
-    const file = event.target.files[0]
-    console.log('input', file)
+  async compressImage(event, useWebWorker) {
+    const file = event.target.files[0];
+    console.log('input', file);
     console.log(
       'ExifOrientation',
-      await imageCompression.getExifOrientation(file)
-    )
-    const targetName = useWebWorker ? 'webWorker' : 'mainThread'
-    this.setState(prevState => ({
+      await imageCompression.getExifOrientation(file),
+    );
+    const targetName = useWebWorker ? 'webWorker' : 'mainThread';
+    this.setState((prevState) => ({
       ...prevState,
       [targetName]: {
         ...prevState[targetName],
         inputSize: (file.size / 1024 / 1024).toFixed(2),
-        inputUrl: URL.createObjectURL(file)
-      }
-    }))
-    var options = {
+        inputUrl: URL.createObjectURL(file),
+      },
+    }));
+    const options = {
       maxSizeMB: this.state.maxSizeMB,
       maxWidthOrHeight: this.state.maxWidthOrHeight,
       useWebWorker,
-      onProgress: p => this.onProgress(p, useWebWorker)
-    }
-    const output = await imageCompression(file, options)
-    console.log('output', output)
-    this.setState(prevState => ({
+      onProgress: (p) => this.onProgress(p, useWebWorker),
+    };
+    const output = await imageCompression(file, options);
+    console.log('output', output);
+    this.setState((prevState) => ({
       ...prevState,
       [targetName]: {
         ...prevState[targetName],
         outputSize: (output.size / 1024 / 1024).toFixed(2),
-        outputUrl: URL.createObjectURL(output)
-      }
-    }))
+        outputUrl: URL.createObjectURL(output),
+      },
+    }));
   }
 
-  render () {
-    const version = imageCompression.version
-    const { webWorker, mainThread, maxSizeMB, maxWidthOrHeight } = this.state
+  render() {
+    const { version } = imageCompression;
+    const {
+      webWorker, mainThread, maxSizeMB, maxWidthOrHeight,
+    } = this.state;
     return (
       <div className="App">
         <div>
@@ -100,7 +102,7 @@ export default class App extends React.Component {
               id="web-worker"
               type="file"
               accept="image/*"
-              onChange={e => this.compressImage(e, true)}
+              onChange={(e) => this.compressImage(e, true)}
             />
           </label>
           <p>
@@ -120,7 +122,7 @@ export default class App extends React.Component {
               id="main-thread"
               type="file"
               accept="image/*"
-              onChange={e => this.compressImage(e, false)}
+              onChange={(e) => this.compressImage(e, false)}
             />
           </label>
           <p>
@@ -170,6 +172,6 @@ export default class App extends React.Component {
           }
         `}</style>
       </div>
-    )
+    );
   }
-};
+}
