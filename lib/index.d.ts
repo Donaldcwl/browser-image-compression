@@ -2,7 +2,7 @@
 // Project: https://github.com/Donaldcwl/browser-image-compression
 // Definitions by: Donald <https://github.com/Donaldcwl> & Jamie Haywood <https://github.com/jamiehaywood>
 
-interface Options {
+export interface Options {
     /** @default Number.POSITIVE_INFINITY */
     maxSizeMB?: number;
     /** @default undefined */
