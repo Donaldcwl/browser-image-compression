@@ -6,7 +6,7 @@
 Javascript module to be run in the web browser for image compression.
 
 ## Features
-- You can use this module to compress jpeg and png images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
+- You can use this module to compress jpeg, png, and webp images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
 - **Multi-thread** (web worker) non-blocking compression is supported through options.
 
 
@@ -107,6 +107,8 @@ If this project helps you reduce the time to develop, you can buy me a cup of co
 
 <a href="https://donaldcwl.github.io/donation/" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
 
+(powered by Stripe)
+
 ## API
 ### Main function
 ```javascript
@@ -134,7 +136,7 @@ imageCompression(file: File, options: Options): Promise<File>
 ```
 
 #### Caveat
-Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a Canvas object. <br/>
+Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a browser Canvas object. <br/>
 So, we resize the image to less than the maximum size that each browser restricts. <br/>
 (However, the `proportion/ratio` of the image remains.)
 
@@ -192,6 +194,9 @@ You can include the following script to load the core-js polyfill:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.21.1/minified.min.js"></script>
 ```
+
+### Webp support
+The webp compression is supported on major browsers. Please see https://caniuse.com/mdn-api_offscreencanvas_converttoblob_option_type_parameter_webp for browser compatibility.
 
 
 ## Remarks for compression to work in Web Worker
