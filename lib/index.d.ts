@@ -23,6 +23,8 @@ export interface Options {
     alwaysKeepResolution?: boolean;
     /** @default undefined */
     signal?: AbortSignal;
+    /** @default false */
+    preserveExif?: boolean;
 }
 
 declare function imageCompression(image: File, options: Options): Promise<File>;
