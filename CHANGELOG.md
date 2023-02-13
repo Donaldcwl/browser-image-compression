@@ -1,7 +1,7 @@
 ## 2.0.1 (XX Feb 2023)
 * feature: preserve Exif metadata for JPEG [#164](https://github.com/Donaldcwl/browser-image-compression/issues/164)
 * fixed: export Options interface [#157](https://github.com/Donaldcwl/browser-image-compression/issues/157)
-* fixed: black image on iPhone Chrome [#169](https://github.com/Donaldcwl/browser-image-compression/issues/169)
+* fixed: black image output on iOS devices [#169](https://github.com/Donaldcwl/browser-image-compression/issues/169), [#165](https://github.com/Donaldcwl/browser-image-compression/issues/165), [#166](https://github.com/Donaldcwl/browser-image-compression/issues/166)
 
 ## v2.0.0 (13 Apr 2022)
 * feature: example html - added CSS animation for showing main thread status

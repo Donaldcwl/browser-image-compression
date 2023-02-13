@@ -250,31 +250,31 @@ describe('Tests', function () {
   });
 
   it('getBrowserName Chrome', async () => {
-    global.navigator = { userAgent: 'Chrome' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.CHROME);
   });
 
   it('getBrowserName iPhone', async () => {
-    global.navigator = { userAgent: 'WebKit iPhone' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Mobile/15E148 Safari/604.1' };
     const browserName = imageCompression.getBrowserName();
-    expect(browserName).to.equal(BROWSER_NAME.MOBILE_SAFARI);
+    expect(browserName).to.equal(BROWSER_NAME.IOS);
   });
 
   it('getBrowserName Safari', async () => {
-    global.navigator = { userAgent: 'Safari' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.DESKTOP_SAFARI);
   });
 
   it('getBrowserName Firefox', async () => {
-    global.navigator = { userAgent: 'Firefox' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.FIREFOX);
   });
 
   it('getBrowserName MSIE', async () => {
-    global.navigator = { userAgent: 'MSIE' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.IE);
   });
@@ -299,6 +299,10 @@ describe('Tests', function () {
     const maximumCanvasSize = MAX_CANVAS_SIZE[browserName];
     const { width, height } = imageCompression.approximateBelowMaximumCanvasSizeOfBrowser(maximumCanvasSize * 1.3, maximumCanvasSize * 1.2);
     expect(width * height).to.be.lessThanOrEqual(maximumCanvasSize * maximumCanvasSize);
+  });
+
+  it('copyExifWithoutOrientation', async () => {
+
   });
 
   afterEach(() => {
