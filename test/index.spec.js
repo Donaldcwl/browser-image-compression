@@ -14,9 +14,19 @@ const IMAGE_DIR = './example';
 const JPG_NAME = '178440.jpg';
 const JPG_PATH = path.join(IMAGE_DIR, JPG_NAME);
 const JPG_FILE = fs.readFileSync(JPG_PATH);
+const JPG_NAME2 = 'flower.jpg';
+const JPG_PATH2 = path.join(IMAGE_DIR, JPG_NAME2);
+const JPG_FILE2 = fs.readFileSync(JPG_PATH2);
 const PNG_NAME = 'sonic.png';
 const PNG_PATH = path.join(IMAGE_DIR, PNG_NAME);
 const PNG_FILE = fs.readFileSync(PNG_PATH);
+const EXIF_FILES = [
+  ...Array(9).fill('Landscape_#.jpg'),
+  ...Array(9).fill('Portrait_#.jpg'),
+]
+  .map((fileName, i) => fileName.replace('#', i % 9))
+  .map((fileName) => path.join(IMAGE_DIR, 'Exif orientation examples', fileName))
+  .map((filePath) => fs.readFileSync(filePath));
 const base64String = `data:image/jpeg;base64,${Buffer.from(JPG_FILE).toString('base64')}`;
 const base64String2 = `data:image/png;base64,${Buffer.from(PNG_FILE).toString('base64')}`;
 
@@ -25,7 +35,7 @@ chai.use(chaiAsPromised);
 describe('Tests', function () {
   this.timeout(30000);
 
-  const navigator = global.navigator;
+  const { navigator } = global;
 
   beforeEach(() => {
     global.navigator = navigator;
@@ -204,10 +214,25 @@ describe('Tests', function () {
     await expect(imageCompression(file, { maxSizeMB, useWebWorker: false })).to.eventually.rejectedWith(/not an image/);
   });
 
-  it('get the image orientation from Exif', async () => {
-    const file = new File(JPG_FILE, JPG_NAME);
+  it('get the image orientation from Exif #-2 - orientation: -2', async () => {
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' });
     const orientation = await getExifOrientation(file);
     expect(orientation).to.equal(-2);
+  });
+
+  it('get the image orientation from Exif #-1 - orientation: -1', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+    const orientation = await getExifOrientation(file);
+    expect(orientation).to.equal(-1);
+  });
+
+  EXIF_FILES.forEach((blob, i) => {
+    const targetExifOrientation = i % 9;
+    it(`get the image orientation from Exif #${i} - orientation: ${targetExifOrientation}`, async () => {
+      const file = new File([blob], `${i}.jpg`);
+      const orientation = await getExifOrientation(file);
+      expect(orientation).to.equal(targetExifOrientation);
+    });
   });
 
   it('alwaysKeepResolution', async () => {
@@ -301,8 +326,40 @@ describe('Tests', function () {
     expect(width * height).to.be.lessThanOrEqual(maximumCanvasSize * maximumCanvasSize);
   });
 
-  it('copyExifWithoutOrientation', async () => {
+  it('copyExifWithoutOrientation image with exif', async () => {
+    const file = new File([JPG_FILE2], JPG_NAME2, { type: 'image/jpeg' });
 
+    const [compressedFileWithExif, compressedFileWithoutExif] = await Promise.all([
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: true,
+      }),
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: false,
+      }),
+    ]);
+    expect(compressedFileWithExif.size).to.be.greaterThan(compressedFileWithoutExif.size);
+  });
+
+  it('copyExifWithoutOrientation image without exif', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+
+    const [compressedFileWithExif, compressedFileWithoutExif] = await Promise.all([
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: true,
+      }),
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: false,
+      }),
+    ]);
+    expect(compressedFileWithExif.size).to.be.equal(compressedFileWithoutExif.size);
   });
 
   afterEach(() => {
