@@ -1,5 +1,7 @@
 ## 2.0.1 (XX Feb 2023)
 * feature: preserve Exif metadata for JPEG [#164](https://github.com/Donaldcwl/browser-image-compression/issues/164)
+* optimized: solved error in sensible CSP environment [#106](https://github.com/Donaldcwl/browser-image-compression/issues/106)
+* fixed: circular dependency [#34](https://github.com/Donaldcwl/browser-image-compression/issues/34)
 * fixed: export Options interface [#157](https://github.com/Donaldcwl/browser-image-compression/issues/157)
 * fixed: black image output on iOS devices [#169](https://github.com/Donaldcwl/browser-image-compression/issues/169), [#165](https://github.com/Donaldcwl/browser-image-compression/issues/165), [#166](https://github.com/Donaldcwl/browser-image-compression/issues/166)
 

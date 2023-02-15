@@ -25,6 +25,8 @@ export interface Options {
     signal?: AbortSignal;
     /** @default false */
     preserveExif?: boolean;
+    /** @default https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js */
+    libURL?: string;
 }
 
 declare function imageCompression(image: File, options: Options): Promise<File>;

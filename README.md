@@ -120,6 +120,7 @@ const options: Options = {
                                 // Please check the Caveat part for details.
   onProgress: Function,         // optional, a function takes one progress argument (percentage from 0 to 100) 
   useWebWorker: boolean,        // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+  libURL: string,               // optional, the libURL of this library for importing script in Web Worker (default: https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js)
   preserveExif: boolean,        // optional, use preserve Exif metadata for JPEG image e.g., Camera model, Focal length, etc (default: false)
 
   signal: AbortSignal,          // options, to abort / cancel the compression
@@ -178,6 +179,7 @@ imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HT
 imageCompression.drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
 imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+imageCompression.copyExifWithoutOrientation(copyExifFromFile: File, copyExifToFile: File): Promise<File> // based on https://gist.github.com/tonytonyjan/ffb7cd0e82cb293b843ece7e79364233
 ```
 
 
@@ -205,6 +207,14 @@ The browser needs to support "OffscreenCanvas" API in order to take advantage of
 
 ## Typescript type definitions
 Typescript definitions are included in the package & referenced in the `types` section of the `package.json`
+
+
+## Remarks on Content Security Policy (CSP)
+If your website has CSP enabled and you want to use Web Worker (useWebWorker: true), please add the following to the response header
+`content-security-policy: script-src 'self' blob: https://cdn.jsdelivr.net`
+
+- `blob:` is for loading Web Worker script
+- `https://cdn.jsdelivr.net` is for importing this library from CDN inside Web Worker script. If you don't want to load this library from CDN, you can set your self hosted library URL in `options.libURL`.
 
 
 ## Contribution
