@@ -98,7 +98,7 @@ You can download imageCompression from the [dist folder][dist].
 
 Alternatively, you can use a CDN like [delivrjs]:
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
 ```
 
 
