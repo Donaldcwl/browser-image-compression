@@ -7,7 +7,7 @@
   "jsnext:main": "dist/browser-image-compression.mjs",
   "types": "dist/browser-image-compression.d.ts",
   "scripts": {
-    "eslint": "eslint lib test",
+    "eslint": "eslint lib test --fix",
     "build": "rollup -c --environment BUILD:production --bundleConfigAsCjs",
     "watch": "rollup -c -w --environment BUILD:development --bundleConfigAsCjs",
     "dev": "npm run watch",
