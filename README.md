@@ -123,7 +123,7 @@ const options: Options = {
   libURL: string,               // optional, the libURL of this library for importing script in Web Worker (default: https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js)
   preserveExif: boolean,        // optional, use preserve Exif metadata for JPEG image e.g., Camera model, Focal length, etc (default: false)
 
-  signal: AbortSignal,          // options, to abort / cancel the compression
+  signal: AbortSignal,          // optional, to abort / cancel the compression
 
   // following options are for advanced users
   maxIteration: number,         // optional, max number of iteration to compress the image (default: 10)
