@@ -6,7 +6,7 @@
 Javascript module to be run in the web browser for image compression.
 
 ## Features
-- You can use this module to compress jpeg, png, and webp images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
+- You can use this module to compress jpeg, png, webp, and bmp images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
 - **Multi-thread** (web worker) non-blocking compression is supported through options.
 
 
