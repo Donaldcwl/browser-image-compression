@@ -1,4 +1,4 @@
-## 2.0.1 (XX Mar 2023)
+## 2.0.1 (6 Mar 2023)
 * feature: preserve Exif metadata for JPEG [#164](https://github.com/Donaldcwl/browser-image-compression/issues/164)
 * feature: support BMP image compression [#181](https://github.com/Donaldcwl/browser-image-compression/issues/181)
 * optimized: solved error in sensible CSP environment [#106](https://github.com/Donaldcwl/browser-image-compression/issues/106)
