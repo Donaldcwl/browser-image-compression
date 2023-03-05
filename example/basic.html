@@ -7,6 +7,7 @@
   </div>
   browser-image-compression@<span id="version">loading...</span>
   <select onchange="changeVersion(event)">
+    <option value="2.0.1">2.0.1</option>
     <option value="2.0.0">2.0.0</option>
     <option value="1.0.17">1.0.17</option>
     <option value="1.0.16">1.0.16</option>
@@ -100,10 +101,12 @@
   <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/browser-image-compression@latest/dist/browser-image-compression.js"></script>
   <script>
+    let selectedVersion = 'latest'
     function changeVersion(event) {
       document.querySelector("#version").innerHTML = 'loading...';
       const script = document.createElement('script');
-      script.src = "https://cdn.jsdelivr.net/npm/browser-image-compression@"+event.srcElement.value+"/dist/browser-image-compression.js";
+      selectedVersion = event.srcElement.value
+      script.src = "https://cdn.jsdelivr.net/npm/browser-image-compression@"+selectedVersion+"/dist/browser-image-compression.js";
       document.body.appendChild(script);
       script.addEventListener('load', () => {
         document.querySelector("#version").innerHTML = imageCompression.version;
@@ -140,6 +143,8 @@
         ),
         useWebWorker: useWebWorker,
         onProgress: onProgress,
+        preserveExif: true,
+        libURL: "https://cdn.jsdelivr.net/npm/browser-image-compression@"+selectedVersion+"/dist/browser-image-compression.js"
       };
       if (controller) {
         options.signal = controller.signal;

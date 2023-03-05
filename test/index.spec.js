@@ -14,18 +14,32 @@ const IMAGE_DIR = './example';
 const JPG_NAME = '178440.jpg';
 const JPG_PATH = path.join(IMAGE_DIR, JPG_NAME);
 const JPG_FILE = fs.readFileSync(JPG_PATH);
+const JPG_NAME2 = 'flower.jpg';
+const JPG_PATH2 = path.join(IMAGE_DIR, JPG_NAME2);
+const JPG_FILE2 = fs.readFileSync(JPG_PATH2);
 const PNG_NAME = 'sonic.png';
 const PNG_PATH = path.join(IMAGE_DIR, PNG_NAME);
 const PNG_FILE = fs.readFileSync(PNG_PATH);
+const EXIF_FILES = [
+  ...Array(9).fill('Landscape_#.jpg'),
+  ...Array(9).fill('Portrait_#.jpg'),
+]
+  .map((fileName, i) => fileName.replace('#', i % 9))
+  .map((fileName) => path.join(IMAGE_DIR, 'Exif orientation examples', fileName))
+  .map((filePath) => fs.readFileSync(filePath));
+const BMP_NAME = 'sample_1280×853.bmp';
+const BMP_PATH = path.join(IMAGE_DIR, BMP_NAME);
+const BMP_FILE = fs.readFileSync(BMP_PATH);
 const base64String = `data:image/jpeg;base64,${Buffer.from(JPG_FILE).toString('base64')}`;
 const base64String2 = `data:image/png;base64,${Buffer.from(PNG_FILE).toString('base64')}`;
+const base64String3 = `data:image/bmp;base64,${Buffer.from(BMP_FILE).toString('base64')}`;
 
 chai.use(chaiAsPromised);
 
 describe('Tests', function () {
   this.timeout(30000);
 
-  const navigator = global.navigator;
+  const { navigator } = global;
 
   beforeEach(() => {
     global.navigator = navigator;
@@ -56,6 +70,19 @@ describe('Tests', function () {
     const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' });
     const base64 = await getDataUrlFromFile(file);
     expect(base64).to.equal(base64String2);
+  });
+
+  it('get File from bmp base64', async () => {
+    const file = await getFilefromDataUrl(base64String3, BMP_PATH);
+    expect(file.type).to.equal('image/bmp');
+    expect(file.size).to.equal(3275658);
+    expect(file).to.be.an.instanceof(Blob);
+  });
+
+  it('get base64 from bmp file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+    const base64 = await getDataUrlFromFile(file);
+    expect(base64).to.equal(base64String3);
   });
 
   it('load image', async () => {
@@ -177,6 +204,50 @@ describe('Tests', function () {
     expect(img.height).to.be.at.most(maxWidthOrHeight);
   });
 
+  it('compress bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxSizeMB = 1;
+    const maxSizeByte = maxSizeMB * 1024 * 1024;
+
+    const compressedFile = await imageCompression(file, { maxSizeMB, useWebWorker: false, exifOrientation: -2, maxIteration: 15 });
+    expect(compressedFile.size).to.be.at.most(maxSizeByte);
+  });
+
+  it('resize bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxWidthOrHeight = 720;
+
+    const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 });
+
+    const temp = await drawFileInCanvas(compressedFile);
+    const img = temp[0];
+    expect(img.width).to.be.at.most(maxWidthOrHeight);
+    expect(img.height).to.be.at.most(maxWidthOrHeight);
+  });
+
+  it('compress and resize bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxSizeMB = 1;
+    const maxSizeByte = maxSizeMB * 1024 * 1024;
+    const maxWidthOrHeight = 720;
+
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB,
+      maxWidthOrHeight,
+      useWebWorker: false,
+    });
+
+    expect(compressedFile.size).to.be.at.most(maxSizeByte);
+
+    const temp = await drawFileInCanvas(compressedFile);
+    const img = temp[0];
+    expect(img.width).to.be.at.most(maxWidthOrHeight);
+    expect(img.height).to.be.at.most(maxWidthOrHeight);
+  });
+
   it('fails if wrong file provided', async () => {
     const file = undefined;
 
@@ -204,10 +275,25 @@ describe('Tests', function () {
     await expect(imageCompression(file, { maxSizeMB, useWebWorker: false })).to.eventually.rejectedWith(/not an image/);
   });
 
-  it('get the image orientation from Exif', async () => {
-    const file = new File(JPG_FILE, JPG_NAME);
+  it('get the image orientation from Exif #-2 - orientation: -2', async () => {
+    const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' });
     const orientation = await getExifOrientation(file);
     expect(orientation).to.equal(-2);
+  });
+
+  it('get the image orientation from Exif #-1 - orientation: -1', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+    const orientation = await getExifOrientation(file);
+    expect(orientation).to.equal(-1);
+  });
+
+  EXIF_FILES.forEach((blob, i) => {
+    const targetExifOrientation = i % 9;
+    it(`get the image orientation from Exif #${i} - orientation: ${targetExifOrientation}`, async () => {
+      const file = new File([blob], `${i}.jpg`);
+      const orientation = await getExifOrientation(file);
+      expect(orientation).to.equal(targetExifOrientation);
+    });
   });
 
   it('alwaysKeepResolution', async () => {
@@ -250,31 +336,31 @@ describe('Tests', function () {
   });
 
   it('getBrowserName Chrome', async () => {
-    global.navigator = { userAgent: 'Chrome' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.CHROME);
   });
 
   it('getBrowserName iPhone', async () => {
-    global.navigator = { userAgent: 'WebKit iPhone' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Mobile/15E148 Safari/604.1' };
     const browserName = imageCompression.getBrowserName();
-    expect(browserName).to.equal(BROWSER_NAME.MOBILE_SAFARI);
+    expect(browserName).to.equal(BROWSER_NAME.IOS);
   });
 
   it('getBrowserName Safari', async () => {
-    global.navigator = { userAgent: 'Safari' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.DESKTOP_SAFARI);
   });
 
   it('getBrowserName Firefox', async () => {
-    global.navigator = { userAgent: 'Firefox' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.FIREFOX);
   });
 
   it('getBrowserName MSIE', async () => {
-    global.navigator = { userAgent: 'MSIE' };
+    global.navigator = { userAgent: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)' };
     const browserName = imageCompression.getBrowserName();
     expect(browserName).to.equal(BROWSER_NAME.IE);
   });
@@ -299,6 +385,42 @@ describe('Tests', function () {
     const maximumCanvasSize = MAX_CANVAS_SIZE[browserName];
     const { width, height } = imageCompression.approximateBelowMaximumCanvasSizeOfBrowser(maximumCanvasSize * 1.3, maximumCanvasSize * 1.2);
     expect(width * height).to.be.lessThanOrEqual(maximumCanvasSize * maximumCanvasSize);
+  });
+
+  it('copyExifWithoutOrientation image with exif', async () => {
+    const file = new File([JPG_FILE2], JPG_NAME2, { type: 'image/jpeg' });
+
+    const [compressedFileWithExif, compressedFileWithoutExif] = await Promise.all([
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: true,
+      }),
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: false,
+      }),
+    ]);
+    expect(compressedFileWithExif.size).to.be.greaterThan(compressedFileWithoutExif.size);
+  });
+
+  it('copyExifWithoutOrientation image without exif', async () => {
+    const file = new File([JPG_FILE], JPG_NAME, { type: 'image/jpeg' });
+
+    const [compressedFileWithExif, compressedFileWithoutExif] = await Promise.all([
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: true,
+      }),
+      await imageCompression(file, {
+        maxSizeMB: 1,
+        useWebWorker: false,
+        preserveExif: false,
+      }),
+    ]);
+    expect(compressedFileWithExif.size).to.be.equal(compressedFileWithoutExif.size);
   });
 
   afterEach(() => {

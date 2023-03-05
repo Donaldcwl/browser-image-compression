@@ -6,7 +6,7 @@
 Javascript module to be run in the web browser for image compression.
 
 ## Features
-- You can use this module to compress jpeg and png images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
+- You can use this module to compress jpeg, png, webp, and bmp images by reducing **resolution** or **storage size** before uploading to the application server to save bandwidth.
 - **Multi-thread** (web worker) non-blocking compression is supported through options.
 
 
@@ -34,7 +34,7 @@ async function handleImageUpload(event) {
   const options = {
     maxSizeMB: 1,
     maxWidthOrHeight: 1920,
-    useWebWorker: true
+    useWebWorker: true,
   }
   try {
     const compressedFile = await imageCompression(imageFile, options);
@@ -98,7 +98,7 @@ You can download imageCompression from the [dist folder][dist].
 
 Alternatively, you can use a CDN like [delivrjs]:
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.0/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
 ```
 
 
@@ -106,6 +106,8 @@ Alternatively, you can use a CDN like [delivrjs]:
 If this project helps you reduce the time to develop, you can buy me a cup of coffee :)
 
 <a href="https://donaldcwl.github.io/donation/" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" height=60 width=217 ></a>
+
+(powered by Stripe)
 
 ## API
 ### Main function
@@ -118,8 +120,10 @@ const options: Options = {
                                 // Please check the Caveat part for details.
   onProgress: Function,         // optional, a function takes one progress argument (percentage from 0 to 100) 
   useWebWorker: boolean,        // optional, use multi-thread web worker, fallback to run in main-thread (default: true)
+  libURL: string,               // optional, the libURL of this library for importing script in Web Worker (default: https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js)
+  preserveExif: boolean,        // optional, use preserve Exif metadata for JPEG image e.g., Camera model, Focal length, etc (default: false)
 
-  signal: AbortSignal,          // options, to abort / cancel the compression
+  signal: AbortSignal,          // optional, to abort / cancel the compression
 
   // following options are for advanced users
   maxIteration: number,         // optional, max number of iteration to compress the image (default: 10)
@@ -133,7 +137,7 @@ imageCompression(file: File, options: Options): Promise<File>
 ```
 
 #### Caveat
-Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a Canvas object. <br/>
+Each browser limits [the maximum size](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size) of a browser Canvas object. <br/>
 So, we resize the image to less than the maximum size that each browser restricts. <br/>
 (However, the `proportion/ratio` of the image remains.)
 
@@ -175,6 +179,7 @@ imageCompression.drawImageInCanvas(img: HTMLImageElement, fileType?: string): HT
 imageCompression.drawFileInCanvas(file: File, options?: Options): Promise<[ImageBitmap | HTMLImageElement, HTMLCanvasElement | OffscreenCanvas]>
 imageCompression.canvasToFile(canvas: HTMLCanvasElement | OffscreenCanvas, fileType: string, fileName: string, fileLastModified: number, quality?: number): Promise<File>
 imageCompression.getExifOrientation(file: File): Promise<number> // based on https://stackoverflow.com/a/32490603/10395024
+imageCompression.copyExifWithoutOrientation(copyExifFromFile: File, copyExifToFile: File): Promise<File> // based on https://gist.github.com/tonytonyjan/ffb7cd0e82cb293b843ece7e79364233
 ```
 
 
@@ -192,6 +197,9 @@ You can include the following script to load the core-js polyfill:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.21.1/minified.min.js"></script>
 ```
 
+### Webp support
+The webp compression is supported on major browsers. Please see https://caniuse.com/mdn-api_offscreencanvas_converttoblob_option_type_parameter_webp for browser compatibility.
+
 
 ## Remarks for compression to work in Web Worker
 The browser needs to support "OffscreenCanvas" API in order to take advantage of non-blocking compression. If the browser does not support "OffscreenCanvas" API, the main thread is used instead. See https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility for browser compatibility of "OffscreenCanvas" API.
@@ -199,6 +207,14 @@ The browser needs to support "OffscreenCanvas" API in order to take advantage of
 
 ## Typescript type definitions
 Typescript definitions are included in the package & referenced in the `types` section of the `package.json`
+
+
+## Remarks on Content Security Policy (CSP)
+If your website has CSP enabled and you want to use Web Worker (useWebWorker: true), please add the following to the response header
+`content-security-policy: script-src 'self' blob: https://cdn.jsdelivr.net`
+
+- `blob:` is for loading Web Worker script
+- `https://cdn.jsdelivr.net` is for importing this library from CDN inside Web Worker script. If you don't want to load this library from CDN, you can set your self hosted library URL in `options.libURL`.
 
 
 ## Contribution

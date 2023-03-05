@@ -121,6 +121,8 @@
         ),
         useWebWorker: useWebWorker,
         onProgress: onProgress,
+        preserveExif: true,
+        libURL: location.origin + '/dist/browser-image-compression.js'
       };
       if (controller) {
         options.signal = controller.signal;
