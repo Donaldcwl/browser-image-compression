@@ -27,8 +27,12 @@ const EXIF_FILES = [
   .map((fileName, i) => fileName.replace('#', i % 9))
   .map((fileName) => path.join(IMAGE_DIR, 'Exif orientation examples', fileName))
   .map((filePath) => fs.readFileSync(filePath));
+const BMP_NAME = 'sample_1280×853.bmp';
+const BMP_PATH = path.join(IMAGE_DIR, BMP_NAME);
+const BMP_FILE = fs.readFileSync(BMP_PATH);
 const base64String = `data:image/jpeg;base64,${Buffer.from(JPG_FILE).toString('base64')}`;
 const base64String2 = `data:image/png;base64,${Buffer.from(PNG_FILE).toString('base64')}`;
+const base64String3 = `data:image/bmp;base64,${Buffer.from(BMP_FILE).toString('base64')}`;
 
 chai.use(chaiAsPromised);
 
@@ -66,6 +70,19 @@ describe('Tests', function () {
     const file = new File([PNG_FILE], PNG_NAME, { type: 'image/png' });
     const base64 = await getDataUrlFromFile(file);
     expect(base64).to.equal(base64String2);
+  });
+
+  it('get File from bmp base64', async () => {
+    const file = await getFilefromDataUrl(base64String3, BMP_PATH);
+    expect(file.type).to.equal('image/bmp');
+    expect(file.size).to.equal(3275658);
+    expect(file).to.be.an.instanceof(Blob);
+  });
+
+  it('get base64 from bmp file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+    const base64 = await getDataUrlFromFile(file);
+    expect(base64).to.equal(base64String3);
   });
 
   it('load image', async () => {
@@ -182,6 +199,50 @@ describe('Tests', function () {
 
     const temp = await drawFileInCanvas(compressedFile);
 
+    const img = temp[0];
+    expect(img.width).to.be.at.most(maxWidthOrHeight);
+    expect(img.height).to.be.at.most(maxWidthOrHeight);
+  });
+
+  it('compress bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxSizeMB = 1;
+    const maxSizeByte = maxSizeMB * 1024 * 1024;
+
+    const compressedFile = await imageCompression(file, { maxSizeMB, useWebWorker: false, exifOrientation: -2, maxIteration: 15 });
+    expect(compressedFile.size).to.be.at.most(maxSizeByte);
+  });
+
+  it('resize bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxWidthOrHeight = 720;
+
+    const compressedFile = await imageCompression(file, { maxWidthOrHeight, useWebWorker: false, exifOrientation: -2 });
+
+    const temp = await drawFileInCanvas(compressedFile);
+    const img = temp[0];
+    expect(img.width).to.be.at.most(maxWidthOrHeight);
+    expect(img.height).to.be.at.most(maxWidthOrHeight);
+  });
+
+  it('compress and resize bmp image file', async () => {
+    const file = new File([BMP_FILE], BMP_NAME, { type: 'image/bmp' });
+
+    const maxSizeMB = 1;
+    const maxSizeByte = maxSizeMB * 1024 * 1024;
+    const maxWidthOrHeight = 720;
+
+    const compressedFile = await imageCompression(file, {
+      maxSizeMB,
+      maxWidthOrHeight,
+      useWebWorker: false,
+    });
+
+    expect(compressedFile.size).to.be.at.most(maxSizeByte);
+
+    const temp = await drawFileInCanvas(compressedFile);
     const img = temp[0];
     expect(img.width).to.be.at.most(maxWidthOrHeight);
     expect(img.height).to.be.at.most(maxWidthOrHeight);
