@@ -1,6 +1,6 @@
 {
   "name": "browser-image-compression",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Compress images in the browser",
   "main": "dist/browser-image-compression.js",
   "module": "dist/browser-image-compression.mjs",
@@ -75,8 +75,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "engines": {
-    "node": ">=14 <=16"
   }
 }
