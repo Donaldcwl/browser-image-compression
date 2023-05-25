@@ -2,7 +2,7 @@
 // Project: https://github.com/Donaldcwl/browser-image-compression
 // Definitions by: Donald <https://github.com/Donaldcwl> & Jamie Haywood <https://github.com/jamiehaywood>
 
-interface Options {
+export interface Options {
     /** @default Number.POSITIVE_INFINITY */
     maxSizeMB?: number;
     /** @default undefined */
@@ -23,6 +23,10 @@ interface Options {
     alwaysKeepResolution?: boolean;
     /** @default undefined */
     signal?: AbortSignal;
+    /** @default false */
+    preserveExif?: boolean;
+    /** @default https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js */
+    libURL?: string;
 }
 
 declare function imageCompression(image: File, options: Options): Promise<File>;

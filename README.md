@@ -10,9 +10,6 @@ Javascript module to be run in the web browser for image compression.
 - **Multi-thread** (web worker) non-blocking compression is supported through options.
 
 
-## Upgrade to version 2
-Note that core-js is dropped in version 2, please read the [IE support](#ie-support) section.
-
 ## Demo / Example
 open https://donaldcwl.github.io/browser-image-compression/example/basic.html
 
@@ -98,7 +95,7 @@ You can download imageCompression from the [dist folder][dist].
 
 Alternatively, you can use a CDN like [delivrjs]:
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 ```
 
 
