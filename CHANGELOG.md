@@ -1,3 +1,6 @@
+## 2.0.3 (TBC 2023)
+* fixed: skip copy Exif metadata when fails [#187](https://github.com/Donaldcwl/browser-image-compression/issues/187)
+
 ## 2.0.2 (6 Mar 2023)
 * fixed: node version restriction [#185](https://github.com/Donaldcwl/browser-image-compression/issues/185)
 
