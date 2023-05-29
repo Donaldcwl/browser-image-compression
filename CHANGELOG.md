@@ -1,6 +1,7 @@
 ## 2.0.3 (TBC 2023)
 * fixed: skip copy Exif metadata when fails [#187](https://github.com/Donaldcwl/browser-image-compression/issues/187)
 * fixed: raise error if image file is corrupted / cannot be loaded [#194](https://github.com/Donaldcwl/browser-image-compression/issues/194)
+* fixed: BMP output size may increase in some situations [#195](https://github.com/Donaldcwl/browser-image-compression/issues/195)
 
 ## 2.0.2 (6 Mar 2023)
 * fixed: node version restriction [#185](https://github.com/Donaldcwl/browser-image-compression/issues/185)
