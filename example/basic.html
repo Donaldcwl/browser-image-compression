@@ -166,7 +166,7 @@
           return uploadToServer(output);
         })
         .catch(function (error) {
-          alert(error.message);
+          alert(error.message || error);
         });
 
       function onProgress(p) {
