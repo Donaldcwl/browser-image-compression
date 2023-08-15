@@ -9,7 +9,7 @@ if (typeof window.Worker === 'undefined') {
 }
 
 global.window = window;
-const KEYS = ['document', 'navigator', 'Blob', 'File', 'URL', 'Worker', 'FileReader', 'atob', 'Uint8Array', 'Image', 'HTMLCanvasElement', 'HTMLImageElement'];
+const KEYS = ['document', 'navigator', 'Blob', 'File', 'URL', 'Worker', 'FileReader', 'atob', 'Uint8Array', 'Image', 'HTMLCanvasElement', 'HTMLImageElement', 'DOMException'];
 KEYS.forEach((key) => global[key] = window[key]);
 
 if (typeof window.URL.createObjectURL === 'undefined') {
