@@ -29,7 +29,7 @@ export interface Options {
     libURL?: string;
 }
 
-declare function imageCompression(image: File, options: Options): Promise<File>;
+declare function imageCompression(image: File, options: Options): Promise<Blob>;
 
 declare namespace imageCompression {
     function getDataUrlFromFile(file: File): Promise<string>;
